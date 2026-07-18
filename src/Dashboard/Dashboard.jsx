@@ -1,7 +1,7 @@
 import Sidebar from "../Dashboard/Sidebar"
 import Dashboard from "./DashboardData"
 
-const Drivers = () => {
+const AdminDashboard = () => {
     return (
         <div className="flex w-full h-screen overflow-hidden">
             <div className="h-full shrink-0">
@@ -14,4 +14,4 @@ const Drivers = () => {
     )
 }
 
-export default Drivers
+export default AdminDashboard

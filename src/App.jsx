@@ -1,4 +1,4 @@
-import Dashboard from './Dashboard/Dashboard'
+import AdminDashboard from './Dashboard/Dashboard'
 import Drivers from './Drivers-Management/Drivers'
 import Login from './Login/Login'
 import Orders from './Orders-Oversight/Orders'
@@ -26,7 +26,7 @@ function App() {
       path: "/dashboard",
       element: (
         <ProtectedRoute>
-          <Dashboard />
+          <AdminDashboard />
         </ProtectedRoute>
       )
     },
