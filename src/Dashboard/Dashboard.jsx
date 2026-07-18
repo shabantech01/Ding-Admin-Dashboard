@@ -1,16 +1,17 @@
-import Sidebar from "./Sidebar"
+import Sidebar from "../Dashboard/Sidebar"
+import Dashboard from "./DashboardData"
 
-const Dashboard = () => {
+const Drivers = () => {
     return (
-        <div className="flex w-full h-screen">
+        <div className="flex w-full h-screen overflow-hidden">
             <div className="h-full shrink-0">
-                <Sidebar/>
+                <Sidebar />
             </div>
-            <div className="flex-1 p-4">
-                <p>Dashboard</p>
+            <div className="flex flex-col flex-1 h-full overflow-y-auto">
+                <Dashboard />
             </div>
         </div>
     )
 }
 
-export default Dashboard
+export default Drivers
