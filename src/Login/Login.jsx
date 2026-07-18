@@ -1,7 +1,11 @@
 import logo from "../assets/logo.png"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
+    
+    const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
@@ -10,6 +14,8 @@ const Login = () => {
 
     const onSubmit = async (data) => {
         console.log(data)
+        localStorage.setItem("authToken", "demo-token-123")
+        navigate("/dashboard")
     }
 
     return (
