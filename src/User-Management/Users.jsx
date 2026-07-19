@@ -1,14 +1,19 @@
 import Sidebar from "../Dashboard/Sidebar"
 import UserManagement from "./UserManagement"
+import { useState } from "react"
 
 const Users = () => {
+
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+
+
     return (
         <div className="flex w-full h-screen overflow-hidden">
             <div className="h-full shrink-0">
-                <Sidebar/>
+                <Sidebar  isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             </div>
             <div className="flex flex-col flex-1 h-full overflow-y-auto">
-                <UserManagement />
+                <UserManagement  onMenuClick={() => setSidebarOpen(true)} />
             </div>
         </div>
     )

@@ -1,7 +1,6 @@
-// Dashboard.jsx
+
 import { useState } from "react"
 import {
-    Home,
     ShoppingBag,
     DollarSign,
     Users,
@@ -12,7 +11,6 @@ import {
     Activity,
     Award,
 } from "lucide-react"
-import Sidebar from "../Dashboard/Sidebar"
 import Topbar from "../Dashboard/Topbar"
 
 const statCards = [
@@ -108,8 +106,7 @@ const StatCard = ({ stat }) => {
     )
 }
 
-const Dashboard = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+const Dashboard = ({onMenuClick} ) => {
 
     return (
         <div className="flex w-full h-screen overflow-hidden">
@@ -119,7 +116,7 @@ const Dashboard = () => {
                 <Topbar
                     title="System Oversight"
                     userInitials="DE"
-                    onMenuClick={() => setSidebarOpen(true)}
+                    onMenuClick={onMenuClick}
                 />
 
                 <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-6 py-6 sm:py-8">

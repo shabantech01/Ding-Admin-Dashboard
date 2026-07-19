@@ -138,7 +138,7 @@ const PendingCard = ({ item, onApprove, onReject, onViewApplication }) => (
     </div>
 )
 
-const RestaurantManagement = () => {
+const RestaurantManagement = ({onMenuClick}) => {
     const [search, setSearch] = useState("")
     const [activeCategory, setActiveCategory] = useState("All Categories")
     const [approvals, setApprovals] = useState(pendingApprovals)
@@ -165,7 +165,11 @@ const RestaurantManagement = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            <Topbar title="System Oversight" userInitials="DE" />
+            <Topbar
+                title="System Oversight"
+                userInitials="DE"
+                onMenuClick={onMenuClick}
+            />
 
             <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-6 py-6 sm:py-8">
                 {/* Heading + search */}

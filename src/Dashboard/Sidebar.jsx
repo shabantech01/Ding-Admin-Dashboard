@@ -1,4 +1,4 @@
-// Sidebar.jsx
+
 import { NavLink } from "react-router-dom"
 import { X } from "lucide-react"
 import home from "../assets/home.svg"

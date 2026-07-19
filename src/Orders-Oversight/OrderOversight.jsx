@@ -45,7 +45,7 @@ const OrderStatus = ({ status }) => {
     )
 }
 
-const OrderManagement = () => {
+const OrderManagement = ({onMenuClick}) => {
     const [search, setSearch] = useState("")
     const [activeStatus, setActiveStatus] = useState("All Orders")
     const [activeDate, setActiveDate] = useState("All Dates")
@@ -67,7 +67,11 @@ const OrderManagement = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            <Topbar title="System Oversight" userInitials="DE" />
+            <Topbar
+                            title="System Oversight"
+                            userInitials="DE"
+                            onMenuClick={onMenuClick}
+                        />
 
             <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-6 py-6 sm:py-8">
                 {/* Heading */}
