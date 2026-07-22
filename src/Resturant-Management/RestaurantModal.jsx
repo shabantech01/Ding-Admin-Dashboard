@@ -1,26 +1,41 @@
+import { useState, useEffect } from "react"
 import { X, UtensilsCrossed, FileText, ExternalLink, XCircle, CheckCircle2 } from "lucide-react"
 
 const RestaurantApplicationModal = ({ application, onClose, onApprove, onReject }) => {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 10)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleClose = () => {
+        setIsVisible(false)
+        setTimeout(onClose, 300)
+    }
+
     if (!application) return null
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={onClose}
+            className={`fixed inset-0 z-50 flex justify-end bg-black/50 transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={handleClose}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-sm bg-white rounded-2xl p-5 sm:p-6 flex flex-col gap-5 max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                className={`relative w-full max-w-sm h-full bg-white rounded-l-2xl p-5 sm:p-6 flex flex-col gap-5 overflow-y-auto transition-transform duration-300 ease-out [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+                    isVisible ? "translate-x-0" : "translate-x-full"
+                }`}
             >
-                {/* Close button */}
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="absolute top-4 right-4 text-[#8C8C8C] hover:text-[#000000] transition-colors cursor-pointer"
                 >
                     <X className="w-5 h-5" />
                 </button>
 
-                {/* Icon + name */}
                 <div className="flex flex-col gap-3 pt-1">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-[#FEE2E2]">
                         <UtensilsCrossed className="w-6 h-6 sm:w-7 sm:h-7 text-[#EF4444]" />
@@ -35,7 +50,6 @@ const RestaurantApplicationModal = ({ application, onClose, onApprove, onReject 
 
                 <div className="border-t border-[#EDEDED]" />
 
-                {/* Onboarding details */}
                 <div className="flex flex-col gap-3">
                     <p className="text-[11px] sm:text-xs font-bold text-[#8C8C8C] uppercase tracking-wide">
                         Onboarding Details
@@ -66,57 +80,55 @@ const RestaurantApplicationModal = ({ application, onClose, onApprove, onReject 
                     </div>
                 </div>
 
-                {/* Supporting attachments */}
                 <div className="flex flex-col gap-3">
                     <p className="text-[11px] sm:text-xs font-bold text-[#8C8C8C] uppercase tracking-wide">
                         Supporting Attachments
                     </p>
 
-                <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-3 p-4 border border-[#EDEDED] rounded-xl hover:bg-[#FAFAFA] transition-colors"
-                >
-                    <div className="flex items-center gap-3 min-w-0">
-                        <FileText className="w-5 h-5 text-[#EF4444] shrink-0" />
-                        <span className="text-sm font-semibold text-[#000000] truncate">
-                            Business License & Permit
+                    <a
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between gap-3 p-4 border border-[#EDEDED] rounded-xl hover:bg-[#FAFAFA] transition-colors"
+                    >
+                        <div className="flex items-center gap-3 min-w-0">
+                            <FileText className="w-5 h-5 text-[#EF4444] shrink-0" />
+                            <span className="text-sm font-semibold text-[#000000] truncate">
+                                Business License & Permit
+                            </span>
+                        </div>
+                        <span className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#EF4444] shrink-0">
+                            View
+                            <ExternalLink className="w-3.5 h-3.5" />
                         </span>
-                    </div>
-                    <span className="flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#EF4444] shrink-0">
-                        View
-                        <ExternalLink className="w-3.5 h-3.5" />
-                    </span>
-                </a>
+                    </a>
 
-                <div className="flex flex-col gap-1.5 p-4 border border-[#EDEDED] rounded-xl">
-                    <p className="text-sm font-bold text-[#000000]">Menu Sample Preview:</p>
-                    <p className="text-sm italic text-[#5C5C5C] leading-relaxed">
-                        {application.menuSample}
-                    </p>
+                    <div className="flex flex-col gap-1.5 p-4 border border-[#EDEDED] rounded-xl">
+                        <p className="text-sm font-bold text-[#000000]">Menu Sample Preview:</p>
+                        <p className="text-sm italic text-[#5C5C5C] leading-relaxed">
+                            {application.menuSample}
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                    <button
+                        onClick={() => onReject(application.id)}
+                        className="flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-[#FEE2E2] text-[#EF4444] text-xs sm:text-sm font-semibold whitespace-nowrap hover:bg-[#FCA5A5] transition-colors cursor-pointer"
+                    >
+                        <XCircle className="w-4 h-4 shrink-0" />
+                        Reject Request
+                    </button>
+                    <button
+                        onClick={() => onApprove(application.id)}
+                        className="flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-[#765AB8] text-white text-xs sm:text-sm font-semibold whitespace-nowrap hover:bg-[#654A9F] transition-colors cursor-pointer"
+                    >
+                        <CheckCircle2 className="w-4 h-4 shrink-0" />
+                        Approve Request
+                    </button>
                 </div>
             </div>
-
-            {/* Action buttons */}
-            <div className="grid grid-cols-2 gap-3 pt-1">
-                <button
-                    onClick={() => onReject(application.id)}
-                    className="flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-[#FEE2E2] text-[#EF4444] text-xs sm:text-sm font-semibold whitespace-nowrap hover:bg-[#FCA5A5] transition-colors cursor-pointer"
-                >
-                    <XCircle className="w-4 h-4 shrink-0" />
-                    Reject Request
-                </button>
-                <button
-                    onClick={() => onApprove(application.id)}
-                    className="flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-[#765AB8] text-white text-xs sm:text-sm font-semibold whitespace-nowrap hover:bg-[#654A9F] transition-colors cursor-pointer"
-                >
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    Approve Request
-                </button>
-            </div>
         </div>
-        </div >
     )
 }
 
