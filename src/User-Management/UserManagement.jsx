@@ -138,7 +138,6 @@ const UserManagement = ({onMenuClick}) => {
         <div className="flex flex-col min-h-screen bg-white">
             <Topbar
                 title="System Oversight"
-                userInitials="DE"
                 onMenuClick={onMenuClick}
             />
 

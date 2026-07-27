@@ -1,13 +1,28 @@
-import { Navigate } from "react-router-dom"
+import { useEffect } from "react"
+import { Navigate, useLocation } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { useAuth } from "./hooks/useAuth"
+import { logout } from "./features/auth/authSlice"
+import { useSessionExpiry } from "./hooks/useSessionExpiry"
 
 const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem("authToken")
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const { isAuthenticated, isTokenExpired, user } = useAuth()
 
-    if (!token) {
-        return <Navigate to="/" replace />
+  useSessionExpiry()
+
+  useEffect(() => {
+    if (isAuthenticated && (isTokenExpired() || user?.role !== "SUPERADMIN")) {
+      dispatch(logout())
     }
+  }, [location.pathname])
 
-    return children
+  if (!isAuthenticated || isTokenExpired() || user?.role !== "SUPERADMIN") {
+    return <Navigate to="/" replace state={{ from: location }} />
+  }
+
+  return children
 }
 
 export default ProtectedRoute

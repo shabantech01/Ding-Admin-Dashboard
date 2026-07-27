@@ -1,0 +1,73 @@
+@reference "../index.css";
+
+.container {
+  @apply flex min-h-screen flex-col items-center justify-between bg-white px-4 py-8 select-none;
+}
+
+.logoContainer {
+  @apply mt-8 w-full max-w-[600px];
+}
+
+.logo {
+  @apply mx-auto h-[70px] w-auto object-contain;
+}
+
+.formContainer {
+  @apply w-full max-w-[600px] bg-white rounded-[24px] p-10 shadow-sm border border-gray-100/50 mt-8 mb-auto;
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.headerWrapper {
+  @apply text-left mb-6;
+}
+
+.title {
+  @apply text-[30px] font-bold text-black leading-tight;
+}
+
+.subtitle {
+  @apply text-[14px] text-gray-400 mt-1 font-medium;
+}
+
+.errorContainer {
+  @apply mb-6 p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm font-medium flex items-center gap-2;
+}
+
+.rememberMeWrapper {
+  @apply flex items-center justify-between mb-5;
+}
+
+.rememberMeButton {
+  @apply flex items-center gap-3 cursor-pointer focus:outline-none bg-transparent border-0 p-0 text-left;
+}
+
+.checkboxContainer {
+  @apply w-5 h-5 rounded border flex items-center justify-center transition-all;
+}
+
+.checkboxChecked {
+  @apply bg-[#765AB8] border-[#765AB8];
+}
+
+.checkboxUnchecked {
+  @apply bg-white border-gray-300 group-hover:border-gray-400;
+}
+
+.rememberMeText {
+  @apply text-[14px] font-medium text-gray-700 select-none group-hover:text-gray-900 transition-colors;
+}
+
+.submitButton {
+  @apply w-full py-4 text-white text-[15px] font-semibold rounded-lg bg-[#765AB8] hover:opacity-90 hover:shadow-md active:scale-[0.99] transition-all disabled:opacity-50 cursor-pointer;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

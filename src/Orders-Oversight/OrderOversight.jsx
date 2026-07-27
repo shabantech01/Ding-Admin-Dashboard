@@ -68,10 +68,9 @@ const OrderManagement = ({onMenuClick}) => {
     return (
         <div className="flex flex-col min-h-screen bg-white">
             <Topbar
-                            title="System Oversight"
-                            userInitials="DE"
-                            onMenuClick={onMenuClick}
-                        />
+                title="System Oversight"
+                onMenuClick={onMenuClick}
+            />
 
             <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-6 py-6 sm:py-8">
                 {/* Heading */}
