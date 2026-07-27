@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { X, FileText, User, UtensilsCrossed, Truck, CheckCircle2, HelpCircle } from "lucide-react"
 
 const timelineSteps = [
@@ -40,9 +41,20 @@ const TimelineItem = ({ step, isCompleted, isLast }) => (
 )
 
 const OrderDetailModal = ({ order, onClose }) => {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 10)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleClose = () => {
+        setIsVisible(false)
+        setTimeout(onClose, 300)
+    }
+
     if (!order) return null
 
-    // Order ka current status kaunsa step tak complete ho chuka hai, wo yahan decide hota hai
     const statusIndex = {
         "Placed": 0,
         "Preparing": 2,
@@ -58,24 +70,25 @@ const OrderDetailModal = ({ order, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={onClose}
+            className={`fixed inset-0 z-50 flex justify-end bg-black/50 transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={handleClose}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-sm bg-white rounded-2xl flex flex-col max-h-[92vh]"
+                className={`relative w-full max-w-sm h-full bg-white rounded-l-2xl flex flex-col transition-transform duration-300 ease-out ${
+                    isVisible ? "translate-x-0" : "translate-x-full"
+                }`}
             >
-                {/* Scrollable body */}
-                <div className="flex flex-col gap-6 p-5 sm:p-6 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                    {/* Close button */}
+                <div className="flex flex-col gap-6 p-5 sm:p-6 overflow-y-auto flex-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="absolute top-5 right-5 sm:top-6 sm:right-6 text-[#8C8C8C] hover:text-[#000000] transition-colors cursor-pointer"
                     >
                         <X className="w-5 h-5" />
                     </button>
 
-                    {/* Icon + heading */}
                     <div className="flex flex-col gap-3 pt-1">
                         <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-[#FEE2E2]">
                             <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-[#EF4444]" />
@@ -90,7 +103,6 @@ const OrderDetailModal = ({ order, onClose }) => {
 
                     <div className="border-t border-[#EDEDED] -mt-2" />
 
-                    {/* Stakeholders */}
                     <div className="flex flex-col gap-3">
                         <p className="text-[11px] sm:text-xs font-bold text-[#8C8C8C] uppercase tracking-wide">
                             Stakeholders
@@ -131,7 +143,6 @@ const OrderDetailModal = ({ order, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Delivery status timeline */}
                     <div className="flex flex-col gap-3">
                         <p className="text-[11px] sm:text-xs font-bold text-[#8C8C8C] uppercase tracking-wide">
                             Delivery Status Timeline
@@ -149,7 +160,6 @@ const OrderDetailModal = ({ order, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Order basket */}
                     <div className="flex flex-col gap-3">
                         <div className="flex items-center justify-between">
                             <p className="text-[11px] sm:text-xs font-bold text-[#8C8C8C] uppercase tracking-wide">
@@ -203,9 +213,8 @@ const OrderDetailModal = ({ order, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Close button */}
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="w-full h-12 rounded-lg py-3 border border-[#D9D9D9] text-sm sm:text-base font-bold text-[#000000] hover:bg-[#F9F9F9] transition-colors cursor-pointer"
                     >
                         Close Oversight Detail

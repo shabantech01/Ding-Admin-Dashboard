@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import {
     X,
     RotateCcw,
@@ -111,6 +111,7 @@ const DocumentUploadRow = ({ docType, file, onUpload }) => {
 }
 
 const AddDriverModal = ({ onClose, onSubmit }) => {
+    const [isVisible, setIsVisible] = useState(false)
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -124,6 +125,16 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
         profilePhoto: null,
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 10)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleClose = () => {
+        setIsVisible(false)
+        setTimeout(onClose, 300)
+    }
 
     const handleChange = (field) => (e) => {
         setFormData((prev) => ({ ...prev, [field]: e.target.value }))
@@ -148,9 +159,8 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
         if (!isFormValid) return
         setIsSubmitting(true)
         try {
-            // TODO: API call — driver create karna hai (multipart/form-data ke sath documents)
             await onSubmit({ ...formData, documents })
-            onClose()
+            handleClose()
         } catch (error) {
             console.error(error)
         } finally {
@@ -160,14 +170,17 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={onClose}
+            className={`fixed inset-0 z-50 flex justify-end bg-black/50 transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={handleClose}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-md bg-white rounded-2xl flex flex-col max-h-[92vh]"
+                className={`relative w-full max-w-md h-full bg-white rounded-l-2xl flex flex-col transition-transform duration-300 ease-out ${
+                    isVisible ? "translate-x-0" : "translate-x-full"
+                }`}
             >
-                {/* Header */}
                 <div className="flex items-start justify-between gap-3 p-5 sm:p-6 border-b border-[#EDEDED]">
                     <div>
                         <h2 className="text-lg sm:text-xl font-bold text-[#000000]">
@@ -178,15 +191,14 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
                         </p>
                     </div>
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="text-[#8C8C8C] hover:text-[#000000] transition-colors cursor-pointer shrink-0"
                     >
                         <X className="w-5 h-5" />
                     </button>
                 </div>
 
-                {/* Scrollable body */}
-                <div className="flex flex-col gap-5 p-5 sm:p-6 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                <div className="flex flex-col gap-5 p-5 sm:p-6 overflow-y-auto flex-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex flex-col gap-2">
                         <label className="text-sm font-semibold text-[#000000]">Full Name</label>
                         <input
@@ -240,7 +252,6 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
                         </div>
                     </div>
 
-                    {/* Document uploads */}
                     <div className="flex flex-col gap-3 pt-2">
                         {documentTypes.map((docType) => (
                             <DocumentUploadRow
@@ -253,7 +264,6 @@ const AddDriverModal = ({ onClose, onSubmit }) => {
                     </div>
                 </div>
 
-                {/* Footer */}
                 <div className="p-5 sm:p-6 border-t border-[#EDEDED]">
                     <button
                         onClick={handleSubmit}

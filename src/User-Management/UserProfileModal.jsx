@@ -1,28 +1,41 @@
+import { useState, useEffect } from "react"
 import { X, User, Mail, Phone, Calendar, Clock, ShoppingBag, UserX } from "lucide-react"
 
 const UserProfileModal = ({ user, onClose, onSuspend }) => {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 10)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleClose = () => {
+        setIsVisible(false)
+        setTimeout(onClose, 300)
+    }
+
     if (!user) return null
 
     const isActive = user.status === "Active"
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-            onClick={onClose}
+            className={`fixed inset-0 z-50 flex justify-end bg-black/50 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+                }`}
+            onClick={handleClose}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-sm bg-white rounded-2xl p-5 sm:p-6 flex flex-col gap-5 max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                className={`relative w-full max-w-sm h-full bg-white rounded-l-2xl p-5 sm:p-6 flex flex-col gap-5 overflow-y-auto transition-transform duration-300 ease-out [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${isVisible ? "translate-x-0" : "translate-x-full"
+                    }`}
             >
-                {/* Close button */}
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="absolute top-4 right-4 text-[#8C8C8C] hover:text-[#000000] transition-colors cursor-pointer"
                 >
                     <X className="w-5 h-5" />
                 </button>
 
-                {/* Avatar + name */}
                 <div className="flex flex-col gap-3 pt-1">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-[#FEE2E2]">
                         <User className="w-6 h-6 sm:w-7 sm:h-7 text-[#EF4444]" />
@@ -37,7 +50,6 @@ const UserProfileModal = ({ user, onClose, onSuspend }) => {
 
                 <div className="border-t border-[#EDEDED]" />
 
-                {/* Profile information */}
                 <div className="flex flex-col gap-3">
                     <p className="text-[11px] sm:text-xs font-bold text-[#765AB8] uppercase tracking-wide">
                         Profile Information
@@ -96,7 +108,6 @@ const UserProfileModal = ({ user, onClose, onSuspend }) => {
                     </div>
                 </div>
 
-                {/* Account status */}
                 <div className="flex flex-col gap-3">
                     <p className="text-[11px] sm:text-xs font-bold text-[#765AB8] uppercase tracking-wide">
                         Account Status
@@ -108,8 +119,8 @@ const UserProfileModal = ({ user, onClose, onSuspend }) => {
                         </span>
                         <span
                             className={`px-3 py-1 rounded-full text-xs font-semibold ${isActive
-                                    ? "bg-[#FFF1E6] text-[#D97706]"
-                                    : "bg-[#FDE8E8] text-[#DC2626]"
+                                ? "bg-[#FFF1E6] text-[#D97706]"
+                                : "bg-[#FDE8E8] text-[#DC2626]"
                                 }`}
                         >
                             {user.status}
@@ -120,13 +131,13 @@ const UserProfileModal = ({ user, onClose, onSuspend }) => {
                 <div className="flex flex-col sm:flex-row gap-3 pt-1">
                     <button
                         onClick={() => onSuspend(user.id)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#FEE2E2] text-[#EF4444] text-sm font-semibold hover:bg-[#FCA5A5] transition-colors cursor-pointer"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#FEE2E2] text-[#EF4444] text-sm font-semibold hover:bg-[#FCA5A5] transition-colors cursor-pointer whitespace-nowrap"
                     >
-                        <UserX className="w-4 h-4" />
+                        <UserX className="w-4 h-4 shrink-0" />
                         Suspend Account
                     </button>
                     <button
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="flex-1 px-4 py-2.5 rounded-lg border border-[#D9D9D9] text-[#000000] text-sm font-semibold hover:bg-[#F9F9F9] transition-colors cursor-pointer min-w-[120px]"
                     >
                         Close Detail
