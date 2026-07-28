@@ -5,11 +5,9 @@ import { ADMIN_STORAGE_KEYS } from "../constants/storageKeys"
 
 const loadAuthFromStorage = () => {
   try {
-    // localStorage  → rememberMe was checked (persists across hard refresh)
-    // sessionStorage → rememberMe was unchecked (cleared on hard refresh / tab close)
-    const token =
-      localStorage.getItem(ADMIN_STORAGE_KEYS.ACCESS_TOKEN) ??
-      sessionStorage.getItem(ADMIN_STORAGE_KEYS.ACCESS_TOKEN)
+    const refreshToken =
+      localStorage.getItem(ADMIN_STORAGE_KEYS.REFRESH_TOKEN) ??
+      sessionStorage.getItem(ADMIN_STORAGE_KEYS.REFRESH_TOKEN)
 
     const raw =
       localStorage.getItem(ADMIN_STORAGE_KEYS.USER) ??
@@ -17,9 +15,14 @@ const loadAuthFromStorage = () => {
 
     const user = JSON.parse(raw || "null")
 
-    if (token && user) return { token, user, isAuthenticated: true }
+    if (refreshToken && user) {
+      // Session may exist — AuthInitializer will exchange the refresh token.
+      // accessToken stays null until that succeeds.
+      return { accessToken: null, user, isAuthenticated: false, isInitializing: true }
+    }
   } catch {}
-  return { token: null, user: null, isAuthenticated: false }
+
+  return { accessToken: null, user: null, isAuthenticated: false, isInitializing: false }
 }
 
 export const store = configureStore({

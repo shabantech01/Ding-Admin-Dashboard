@@ -1,17 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi } from "@reduxjs/toolkit/query/react"
+import { baseQueryWithReauth } from "./baseQueryWithReauth"
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.dingapp.co.za/api/v1",
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`)
-      }
-      return headers
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
@@ -20,7 +12,14 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
+    refresh: builder.mutation({
+      query: (refreshToken) => ({
+        url: "/auth/refresh",
+        method: "POST",
+        body: { refreshToken },
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation } = authApi
+export const { useLoginMutation, useRefreshMutation } = authApi

@@ -2,12 +2,14 @@ import { useSelector } from "react-redux"
 import { jwtDecode } from "jwt-decode"
 
 export const useAuth = () => {
-  const { token, user, isAuthenticated } = useSelector((state) => state.auth)
+  const { accessToken, user, isAuthenticated, isInitializing } = useSelector(
+    (state) => state.auth
+  )
 
   const isTokenExpired = () => {
-    if (!token) return true
+    if (!accessToken) return true
     try {
-      const { exp } = jwtDecode(token)
+      const { exp } = jwtDecode(accessToken)
       return Date.now() >= exp * 1000
     } catch {
       return true
@@ -15,14 +17,14 @@ export const useAuth = () => {
   }
 
   const getTokenExpiresIn = () => {
-    if (!token) return 0
+    if (!accessToken) return 0
     try {
-      const { exp } = jwtDecode(token)
+      const { exp } = jwtDecode(accessToken)
       return exp * 1000 - Date.now()
     } catch {
       return 0
     }
   }
 
-  return { token, user, isAuthenticated, isTokenExpired, getTokenExpiresIn }
+  return { accessToken, user, isAuthenticated, isInitializing, isTokenExpired, getTokenExpiresIn }
 }

@@ -1,24 +1,23 @@
-import { useEffect } from "react"
 import { Navigate, useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
 import { useAuth } from "./hooks/useAuth"
-import { logout } from "./features/auth/authSlice"
-import { useSessionExpiry } from "./hooks/useSessionExpiry"
+import { useTokenRefresh } from "./hooks/useTokenRefresh"
 
 const ProtectedRoute = ({ children }) => {
-  const dispatch = useDispatch()
   const location = useLocation()
-  const { isAuthenticated, isTokenExpired, user } = useAuth()
+  const { accessToken, isAuthenticated, isInitializing, user } = useAuth()
 
-  useSessionExpiry()
+  // Proactively refresh accessToken before it expires
+  useTokenRefresh(accessToken)
 
-  useEffect(() => {
-    if (isAuthenticated && (isTokenExpired() || user?.role !== "SUPERADMIN")) {
-      dispatch(logout())
-    }
-  }, [location.pathname])
+  if (isInitializing) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-gray-50">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-orange-500 border-t-transparent" />
+      </div>
+    )
+  }
 
-  if (!isAuthenticated || isTokenExpired() || user?.role !== "SUPERADMIN") {
+  if (!isAuthenticated || user?.role !== "SUPERADMIN") {
     return <Navigate to="/" replace state={{ from: location }} />
   }
 

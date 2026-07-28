@@ -13,7 +13,7 @@ import styles from "./styles.module.css"
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isAuthenticated, isTokenExpired } = useAuth()
+  const { isAuthenticated } = useAuth()
   const [loginRequest, { isLoading }] = useLoginMutation()
   const [rememberMe, setRememberMe] = useState(true)
 
@@ -25,18 +25,17 @@ const Login = () => {
   } = useForm()
 
   useEffect(() => {
-    if (isAuthenticated && !isTokenExpired()) {
-      navigate("/dashboard", { replace: true })
-    }
+    if (isAuthenticated) navigate("/dashboard", { replace: true })
   }, [isAuthenticated])
 
   const onSubmit = async (data) => {
     try {
       const result = await loginRequest(data).unwrap()
-      const token = result?.data?.tokens?.accessToken
+      const accessToken = result?.data?.tokens?.accessToken
+      const refreshToken = result?.data?.tokens?.refreshToken
       const user = result?.data?.user
 
-      if (!token) {
+      if (!accessToken || !refreshToken) {
         setError("root", {
           message: "Unexpected response from server. Please contact support.",
         })
@@ -50,7 +49,7 @@ const Login = () => {
         return
       }
 
-      dispatch(setCredentials({ token, user, rememberMe }))
+      dispatch(setCredentials({ accessToken, refreshToken, user, rememberMe }))
       navigate("/dashboard", { replace: true })
     } catch (err) {
       const message =
