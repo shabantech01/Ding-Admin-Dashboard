@@ -160,7 +160,7 @@ const Dashboard = ({ onMenuClick }) => {
       <div className="flex flex-col gap-6 sm:gap-8 px-4 sm:px-6 py-6 sm:py-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-1">
-            <h4 className="text-2xl sm:text-normal font-bold text-[#000000]">
+            <h4 className="text-2xl sm:text-normal font-bold text-[#000000]!">
               Dashboard
             </h4>
             <p className="text-xs sm:text-sm text-[#8C8C8C]">

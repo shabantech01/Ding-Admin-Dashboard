@@ -16,7 +16,7 @@ const getInitials = (name) =>
 const Topbar = ({ title = "SYSTEM OVERSIGHT", onMenuClick }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user } = useAuth()
+  const { user, accessToken } = useAuth()
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
 
   const displayName = user?.name ?? user?.fullName ?? user?.email ?? "Super Admin"
@@ -49,12 +49,16 @@ const Topbar = ({ title = "SYSTEM OVERSIGHT", onMenuClick }) => {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <div
-            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#765AB8] text-white text-xs sm:text-sm font-semibold"
-            title={displayName}
+          <button
+            onClick={() => {
+              console.log("%c[DEV] Admin Access Token", "color:#765AB8;font-weight:bold;font-size:13px")
+              console.log(accessToken)
+            }}
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#765AB8] text-white text-xs sm:text-sm font-semibold hover:bg-[#654A9F] active:scale-95 transition-all cursor-pointer"
+            title={`[DEV] Click to log access token — ${displayName}`}
           >
             {getInitials(displayName)}
-          </div>
+          </button>
 
           <button
             onClick={() => setShowLogoutConfirm(true)}
