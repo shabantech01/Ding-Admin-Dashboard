@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import authReducer from "../features/auth/authSlice"
 import { authApi } from "../features/auth/authApi"
 import { merchantsApi } from "../features/merchants/merchantsApi"
+import { ridersApi } from "../features/riders/ridersApi"
 import { ADMIN_STORAGE_KEYS } from "../constants/storageKeys"
 
 const loadAuthFromStorage = () => {
@@ -31,10 +32,11 @@ export const store = configureStore({
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [merchantsApi.reducerPath]: merchantsApi.reducer,
+    [ridersApi.reducerPath]: ridersApi.reducer,
   },
   preloadedState: {
     auth: loadAuthFromStorage(),
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, merchantsApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, merchantsApi.middleware, ridersApi.middleware),
 })

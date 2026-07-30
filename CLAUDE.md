@@ -20,7 +20,7 @@ React 19 + Vite + Tailwind v4 + Redux Toolkit (RTK Query). JavaScript (not TypeS
 ## Key files
 | File | Role |
 |---|---|
-| `src/store/index.js` | Redux store — includes `authApi` + `merchantsApi` middleware |
+| `src/store/index.js` | Redux store — includes `authApi` + `merchantsApi` + `ridersApi` middleware |
 | `src/features/auth/authSlice.js` | `setCredentials`, `tokenRefreshed`, `initializationComplete`, `logout` |
 | `src/features/auth/authApi.js` | RTK Query: `login`, `refresh` mutations |
 | `src/features/auth/baseQueryWithReauth.js` | 401 → silent refresh → retry; module-level mutex |
@@ -57,6 +57,53 @@ React 19 + Vite + Tailwind v4 + Redux Toolkit (RTK Query). JavaScript (not TypeS
 - `POST /admin/merchants/:id/reject` — body `{ reason }`
 - `POST /admin/merchants/:id/suspend` — body `{ reason }`
 - All mutations have `invalidatesTags: ["Merchants"]` → list auto-refetches after any action
+
+## Drivers / Riders Management (Drivers-Management/)
+
+### Files
+| File | Role |
+|---|---|
+| `DriverManagement.jsx` | Fetches `GET /admin/riders?status=`; status tabs ALL/ACTIVE/PENDING/SUSPENDED; clickable rows open `RiderDetailModal`; toast on create/action success |
+| `AddDriver.jsx` | Right slide-over; name/email/phone fields; 4 document upload rows; uploads each file to S3 via presigned URL on select, then `POST /admin/riders` on submit |
+| `RiderDetailModal.jsx` | Right slide-over; loads rider by ID; **view mode** (info + docs + activate/suspend); **edit mode** (editable inputs + doc replacement with S3 upload); confirm overlay for activate/suspend |
+
+### S3 presigned upload flow
+1. `POST /files/upload-url { key, contentType }` → `{ uploadUrl, readUrl, key }`
+2. `PUT uploadUrl` with raw file blob + `Content-Type` header (direct `fetch`, no auth token)
+3. Use returned `key` as the doc URL field value in rider payloads
+
+### S3 folder paths
+| Document | S3 prefix |
+|---|---|
+| National ID / Passport | `rider/National-ID-Passport/{uuid}.{ext}` |
+| Driver's License | `rider/Driver-License/{uuid}.{ext}` |
+| Vehicle Registration | `rider/Vehicle-Registration/{uuid}.{ext}` |
+| Profile Photo | `rider/Profile-Photo/{uuid}.{ext}` |
+
+### Accepted file types
+`image/jpeg`, `image/png`, `application/pdf`
+
+### Rider API endpoints — `src/features/riders/ridersApi.js`
+| Method | Path | Hook | Notes |
+|---|---|---|---|
+| GET | `/admin/riders?status=ALL` | `useGetRidersQuery(status)` | `providesTags: ["Riders"]` |
+| GET | `/admin/riders/:id` | `useGetRiderByIdQuery(id)` | `providesTags: [{type:"Riders",id}]` |
+| POST | `/admin/riders` | `useCreateRiderMutation` | `invalidatesTags: ["Riders"]` |
+| PATCH | `/admin/riders/:id` | `useUpdateRiderMutation({id,...body})` | `invalidatesTags: ["Riders"]` |
+| POST | `/admin/riders/:id/verify` | `useVerifyRiderMutation(id)` | Activates PENDING **or** SUSPENDED rider |
+| POST | `/admin/riders/:id/suspend` | `useSuspendRiderMutation(id)` | Suspends ACTIVE rider |
+| POST | `/files/upload-url` | `useGetUploadUrlMutation` | Returns `uploadUrl` + `key` |
+
+### Rider action matrix
+| `riderProfile.status` | Actions |
+|---|---|
+| `PENDING` | Activate (green) — calls `/verify` |
+| `ACTIVE` | Suspend (amber) — calls `/suspend` |
+| `SUSPENDED` | Activate (green) — calls `/verify` (same endpoint as PENDING) |
+
+### Rider payload fields
+- **Create** `POST /admin/riders`: `{ name, email, phone, nationalIdUrl, driversLicenseUrl, vehicleRegistrationUrl, profilePhotoUrl }`
+- **Update** `PATCH /admin/riders/:id`: same fields — pass existing key for unchanged docs, new S3 key for replaced docs
 
 ## Dev helper
 - Avatar initials button in `Topbar.jsx` — click to `console.log` the live `accessToken` (styled purple). For API testing during development only.
