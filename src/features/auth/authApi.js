@@ -19,7 +19,34 @@ export const authApi = createApi({
         body: { refreshToken },
       }),
     }),
+    sendResetOtp: builder.mutation({
+      query: (email) => ({
+        url: "/auth/reset-password/send-otp",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    verifyResetOtp: builder.mutation({
+      query: ({ email, otp }) => ({
+        url: "/auth/reset-password/verify-otp",
+        method: "POST",
+        body: { email, otp },
+      }),
+    }),
+    confirmPasswordReset: builder.mutation({
+      query: ({ resetToken, newPassword }) => ({
+        url: "/auth/reset-password/confirm",
+        method: "POST",
+        body: { resetToken, newPassword },
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useRefreshMutation } = authApi
+export const {
+  useLoginMutation,
+  useRefreshMutation,
+  useSendResetOtpMutation,
+  useVerifyResetOtpMutation,
+  useConfirmPasswordResetMutation,
+} = authApi

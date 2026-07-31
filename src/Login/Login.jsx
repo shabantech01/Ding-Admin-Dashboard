@@ -8,6 +8,7 @@ import { useLoginMutation } from "../features/auth/authApi"
 import { setCredentials } from "../features/auth/authSlice"
 import { useAuth } from "../hooks/useAuth"
 import { InputField } from "../components/InputField"
+import ForgotPassword from "./ForgotPassword"
 import styles from "./styles.module.css"
 
 const Login = () => {
@@ -16,6 +17,7 @@ const Login = () => {
   const { isAuthenticated } = useAuth()
   const [loginRequest, { isLoading }] = useLoginMutation()
   const [rememberMe, setRememberMe] = useState(true)
+  const [showForgot, setShowForgot] = useState(false)
 
   const {
     register,
@@ -70,73 +72,87 @@ const Login = () => {
 
       {/* Form card */}
       <div className={styles.formContainer}>
-        <div className={styles.headerWrapper}>
-          <h1 className={styles.title}>Login</h1>
-          <p className={styles.subtitle}>Login to access your Ding account</p>
-        </div>
+        {showForgot ? (
+          <ForgotPassword onBack={() => setShowForgot(false)} />
+        ) : (
+          <>
+            <div className={styles.headerWrapper}>
+              <h1 className={styles.title}>Login</h1>
+              <p className={styles.subtitle}>Login to access your Ding account</p>
+            </div>
 
-        {errors.root && (
-          <div className={styles.errorContainer}>
-            <span>{errors.root.message}</span>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <InputField
-            label="Email"
-            id="email"
-            type="email"
-            placeholder="Enter your email address"
-            error={errors.email?.message}
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Enter a valid email address",
-              },
-            })}
-          />
-
-          <InputField
-            label="Password"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            error={errors.password?.message}
-            className="mb-3"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            })}
-          />
-
-          {/* Remember Me */}
-          <div className={styles.rememberMeWrapper}>
-            <button
-              type="button"
-              onClick={() => setRememberMe((prev) => !prev)}
-              className={`${styles.rememberMeButton} group`}
-            >
-              <div className={`${styles.checkboxContainer} ${
-                rememberMe ? styles.checkboxChecked : styles.checkboxUnchecked
-              }`}>
-                {rememberMe && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+            {errors.root && (
+              <div className={styles.errorContainer}>
+                <span>{errors.root.message}</span>
               </div>
-              <span className={styles.rememberMeText}>Remember me</span>
-            </button>
-          </div>
+            )}
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={styles.submitButton}
-          >
-            {isLoading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <InputField
+                label="Email"
+                id="email"
+                type="email"
+                placeholder="Enter your email address"
+                error={errors.email?.message}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Enter a valid email address",
+                  },
+                })}
+              />
+
+              <InputField
+                label="Password"
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                error={errors.password?.message}
+                className="mb-3"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+              />
+
+              {/* Remember Me + Forgot Password */}
+              <div className={styles.rememberMeWrapper}>
+                <button
+                  type="button"
+                  onClick={() => setRememberMe((prev) => !prev)}
+                  className={`${styles.rememberMeButton} group`}
+                >
+                  <div className={`${styles.checkboxContainer} ${
+                    rememberMe ? styles.checkboxChecked : styles.checkboxUnchecked
+                  }`}>
+                    {rememberMe && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+                  </div>
+                  <span className={styles.rememberMeText}>Remember me</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowForgot(true)}
+                  className="text-[13px] font-semibold text-[#765AB8] hover:underline cursor-pointer"
+                >
+                  Forgot password?
+                </button>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={styles.submitButton}
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </button>
+            </form>
+          </>
+        )}
       </div>
 
       {/* Spacer to balance justify-between without a footer */}
