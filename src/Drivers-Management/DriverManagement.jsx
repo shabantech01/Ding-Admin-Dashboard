@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 import { Search, Bike, Truck, Plus, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import Topbar from "../Dashboard/Topbar";
 import AddDriverModal from "./AddDriver";
@@ -109,6 +110,7 @@ const DriverManagement = ({ onMenuClick }) => {
   const [selectedRiderId, setSelectedRiderId] = useState(null);
   const [toast, setToast]             = useState(null);
 
+  const { isOnline } = useNetworkStatus()
   const { data: response, isLoading, isError } = useGetRidersQuery(activeTab);
   const riders = response?.data ?? [];
 
@@ -144,7 +146,9 @@ const DriverManagement = ({ onMenuClick }) => {
           </div>
           <button
             onClick={() => setShowAddDriver(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-lg bg-[#765AB8] text-white text-sm font-semibold hover:bg-[#654A9F] transition-colors cursor-pointer whitespace-nowrap"
+            disabled={!isOnline}
+            title={isOnline ? undefined : "No internet connection"}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-lg bg-[#765AB8] text-white text-sm font-semibold hover:bg-[#654A9F] transition-colors cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Plus className="w-4 h-4" />
             Add New Driver

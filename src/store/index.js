@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { setupListeners } from "@reduxjs/toolkit/query"
 import authReducer from "../features/auth/authSlice"
 import { authApi } from "../features/auth/authApi"
 import { merchantsApi } from "../features/merchants/merchantsApi"
@@ -40,3 +41,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware, merchantsApi.middleware, ridersApi.middleware),
 })
+
+// Enables refetchOnFocus / refetchOnReconnect for all RTK Query subscriptions.
+setupListeners(store.dispatch)

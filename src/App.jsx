@@ -5,6 +5,7 @@ import Orders from './Orders-Oversight/Orders'
 import Restaurants from './Resturant-Management/Restaurant'
 import Users from './User-Management/Users'
 import ProtectedRoute from './ProtectedRoutes'
+import OfflineBanner from './components/OfflineBanner'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <>
+      <OfflineBanner />
       <RouterProvider router={router} />
     </>
   )

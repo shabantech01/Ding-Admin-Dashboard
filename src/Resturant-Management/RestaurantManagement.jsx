@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 import {
   Search,
   MapPin,
@@ -65,7 +66,7 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-const PendingCard = ({ merchant, onApprove, onReject, onView }) => (
+const PendingCard = ({ merchant, onApprove, onReject, onView, isOnline }) => (
   <div
     onClick={() => onView(merchant)}
     className="flex flex-col gap-4 py-6 px-5 border border-[#EDEDED] rounded-xl bg-white hover:shadow-md hover:border-[#D4CAEE] transition-all cursor-pointer"
@@ -123,8 +124,9 @@ const PendingCard = ({ merchant, onApprove, onReject, onView }) => (
             e.stopPropagation();
             onReject(merchant);
           }}
-          title="Reject"
-          className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FEE2E2] text-[#EF4444] hover:bg-[#FCA5A5] transition-colors cursor-pointer"
+          disabled={!isOnline}
+          title={isOnline ? "Reject" : "No internet connection"}
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FEE2E2] text-[#EF4444] hover:bg-[#FCA5A5] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <X className="w-4 h-4" strokeWidth={2.5} />
         </button>
@@ -133,8 +135,9 @@ const PendingCard = ({ merchant, onApprove, onReject, onView }) => (
             e.stopPropagation();
             onApprove(merchant);
           }}
-          title="Approve"
-          className="w-8 h-8 flex items-center justify-center rounded-full bg-[#765AB8] text-white hover:bg-[#654A9F] transition-colors cursor-pointer"
+          disabled={!isOnline}
+          title={isOnline ? "Approve" : "No internet connection"}
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-[#765AB8] text-white hover:bg-[#654A9F] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <Check className="w-4 h-4" strokeWidth={2.5} />
         </button>
@@ -157,6 +160,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
   const [pendingSuspend, setPendingSuspend] = useState(null)
   const [toast, setToast] = useState(null)
 
+  const { isOnline } = useNetworkStatus()
   const { data, isLoading, isError, refetch } = useGetMerchantsQuery("ALL");
   const [approveMerchant, { isLoading: isApproving }] =
     useApproveMerchantMutation();
@@ -387,6 +391,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
                       onApprove={initiateApprove}
                       onReject={initiateReject}
                       onView={setSelectedMerchant}
+                      isOnline={isOnline}
                     />
                   ))}
                 </div>
@@ -400,6 +405,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
                       onApprove={initiateApprove}
                       onReject={initiateReject}
                       onSuspend={initiateSuspend}
+                      isOnline={isOnline}
                     />
                   )}
               </>
@@ -411,6 +417,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
                 onApprove={initiateApprove}
                 onReject={initiateReject}
                 onSuspend={initiateSuspend}
+                isOnline={isOnline}
               />
             )}
           </>
@@ -479,7 +486,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
 
 // ─── Directory Table ─────────────────────────────────────────────────────────
 
-const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) => (
+const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend, isOnline }) => (
   <div className="flex flex-col gap-4">
     <h2 className="text-sm font-semibold text-[rgba(0,0,0,.4)]!">
       Merchant Directory
@@ -554,8 +561,9 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
                   {m.status === "ACTIVE" && (
                     <button
                       onClick={() => onSuspend(m)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 text-xs font-semibold hover:bg-amber-100 transition-colors cursor-pointer"
-                      title="Suspend merchant"
+                      disabled={!isOnline}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 text-xs font-semibold hover:bg-amber-100 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                      title={isOnline ? "Suspend merchant" : "No internet connection"}
                     >
                       <PauseCircle className="w-3.5 h-3.5" />
                       Suspend
@@ -565,15 +573,17 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
                     <>
                       <button
                         onClick={() => onReject(m)}
-                        className="p-1.5 rounded-lg bg-[#FEE2E2] text-[#EF4444] hover:bg-[#FCA5A5] transition-colors cursor-pointer"
-                        title="Reject"
+                        disabled={!isOnline}
+                        className="p-1.5 rounded-lg bg-[#FEE2E2] text-[#EF4444] hover:bg-[#FCA5A5] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                        title={isOnline ? "Reject" : "No internet connection"}
                       >
                         <X className="w-3.5 h-3.5" strokeWidth={2.5} />
                       </button>
                       <button
                         onClick={() => onApprove(m)}
-                        className="p-1.5 rounded-lg bg-[#765AB8] text-white hover:bg-[#654A9F] transition-colors cursor-pointer"
-                        title="Approve"
+                        disabled={!isOnline}
+                        className="p-1.5 rounded-lg bg-[#765AB8] text-white hover:bg-[#654A9F] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                        title={isOnline ? "Approve" : "No internet connection"}
                       >
                         <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
                       </button>
@@ -582,8 +592,9 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
                   {m.status === "SUSPENDED" && (
                     <button
                       onClick={() => onApprove(m)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 border border-green-200 text-green-700 text-xs font-semibold hover:bg-green-100 transition-colors cursor-pointer"
-                      title="Reactivate merchant"
+                      disabled={!isOnline}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 border border-green-200 text-green-700 text-xs font-semibold hover:bg-green-100 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                      title={isOnline ? "Reactivate merchant" : "No internet connection"}
                     >
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       Reactivate
@@ -634,7 +645,9 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
             {m.status === "ACTIVE" && (
               <button
                 onClick={() => onSuspend(m)}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-amber-200 bg-amber-50 text-xs font-semibold text-amber-600 hover:bg-amber-100 cursor-pointer"
+                disabled={!isOnline}
+                title={isOnline ? undefined : "No internet connection"}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-amber-200 bg-amber-50 text-xs font-semibold text-amber-600 hover:bg-amber-100 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <PauseCircle className="w-3.5 h-3.5" /> Suspend
               </button>
@@ -643,13 +656,17 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
               <>
                 <button
                   onClick={() => onReject(m)}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-[#FCD5D5] text-xs font-semibold text-[#EF4444] hover:bg-[#FEE2E2] cursor-pointer"
+                  disabled={!isOnline}
+                  title={isOnline ? undefined : "No internet connection"}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-[#FCD5D5] text-xs font-semibold text-[#EF4444] hover:bg-[#FEE2E2] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <X className="w-3.5 h-3.5" /> Reject
                 </button>
                 <button
                   onClick={() => onApprove(m)}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#765AB8] text-xs font-semibold text-white hover:bg-[#654A9F] cursor-pointer"
+                  disabled={!isOnline}
+                  title={isOnline ? undefined : "No internet connection"}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#765AB8] text-xs font-semibold text-white hover:bg-[#654A9F] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <Check className="w-3.5 h-3.5" /> Approve
                 </button>
@@ -658,7 +675,9 @@ const DirectoryTable = ({ merchants, onView, onApprove, onReject, onSuspend }) =
             {m.status === "SUSPENDED" && (
               <button
                 onClick={() => onApprove(m)}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-green-50 border border-green-200 text-xs font-semibold text-green-700 hover:bg-green-100 cursor-pointer"
+                disabled={!isOnline}
+                title={isOnline ? undefined : "No internet connection"}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-green-50 border border-green-200 text-xs font-semibold text-green-700 hover:bg-green-100 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <CheckCircle2 className="w-3.5 h-3.5" /> Reactivate
               </button>

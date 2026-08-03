@@ -43,6 +43,18 @@ const performRefresh = async (api, extraOptions) => {
 }
 
 export const baseQueryWithReauth = async (args, api, extraOptions) => {
+  // Fail fast — do not even attempt the network call when the browser is
+  // offline. This gives every component a consistent, immediate error without
+  // waiting for a TCP timeout.
+  if (!navigator.onLine) {
+    return {
+      error: {
+        status: "FETCH_ERROR",
+        error: "No internet connection. Please check your network and try again.",
+      },
+    }
+  }
+
   let result = await rawBaseQuery(args, api, extraOptions)
 
   if (result.error?.status === 401) {

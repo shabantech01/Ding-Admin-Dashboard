@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNetworkStatus } from "../hooks/useNetworkStatus";
 import {
   X,
   UtensilsCrossed,
@@ -51,6 +52,7 @@ const RestaurantApplicationModal = ({
   onReject,
   onSuspend,
 }) => {
+  const { isOnline } = useNetworkStatus()
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -271,14 +273,18 @@ const RestaurantApplicationModal = ({
           <div className="shrink-0 border-t border-[#EDEDED] p-4 flex gap-3 bg-white">
             <button
               onClick={() => onReject(application)}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FEE2E2] text-[#EF4444] text-sm font-semibold hover:bg-[#FCA5A5] transition-colors cursor-pointer"
+              disabled={!isOnline}
+              title={isOnline ? undefined : "No internet connection"}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#FEE2E2] text-[#EF4444] text-sm font-semibold hover:bg-[#FCA5A5] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <XCircle className="w-4 h-4 shrink-0" />
               Reject
             </button>
             <button
               onClick={() => onApprove(application)}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#765AB8] text-white text-sm font-semibold hover:bg-[#654A9F] transition-colors cursor-pointer"
+              disabled={!isOnline}
+              title={isOnline ? undefined : "No internet connection"}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#765AB8] text-white text-sm font-semibold hover:bg-[#654A9F] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               Approve
@@ -290,7 +296,9 @@ const RestaurantApplicationModal = ({
           <div className="shrink-0 border-t border-[#EDEDED] p-4 bg-white">
             <button
               onClick={() => onSuspend(application)}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 text-sm font-semibold hover:bg-amber-100 transition-colors cursor-pointer"
+              disabled={!isOnline}
+              title={isOnline ? undefined : "No internet connection"}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 text-sm font-semibold hover:bg-amber-100 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <PauseCircle className="w-4 h-4 shrink-0" />
               Suspend Merchant
@@ -302,7 +310,9 @@ const RestaurantApplicationModal = ({
           <div className="shrink-0 border-t border-[#EDEDED] p-4 bg-white">
             <button
               onClick={() => onApprove(application)}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-semibold hover:bg-green-100 transition-colors cursor-pointer"
+              disabled={!isOnline}
+              title={isOnline ? undefined : "No internet connection"}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-semibold hover:bg-green-100 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               Reactivate Merchant

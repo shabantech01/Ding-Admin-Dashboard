@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { useNetworkStatus } from "../hooks/useNetworkStatus"
 import {
   X,
   Mail,
@@ -281,6 +282,7 @@ const RiderDetailModal = ({ riderId, onClose, onActionSuccess }) => {
     vehicleRegistrationUrl: "", profilePhotoUrl: "",
   })
 
+  const { isOnline } = useNetworkStatus()
   const { data: response, isLoading, isError } = useGetRiderByIdQuery(riderId)
   const [verifyRider,  { isLoading: isVerifying  }] = useVerifyRiderMutation()
   const [suspendRider, { isLoading: isSuspending }] = useSuspendRiderMutation()
@@ -599,7 +601,9 @@ const RiderDetailModal = ({ riderId, onClose, onActionSuccess }) => {
                 {(docStatus === "PENDING" || docStatus === "SUSPENDED") && (
                   <button
                     onClick={() => setConfirmAction("activate")}
-                    className="w-full h-11 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    disabled={!isOnline}
+                    title={isOnline ? undefined : "No internet connection"}
+                    className="w-full h-11 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <ShieldCheck className="w-4 h-4" />
                     Activate Rider
@@ -608,7 +612,9 @@ const RiderDetailModal = ({ riderId, onClose, onActionSuccess }) => {
                 {docStatus === "ACTIVE" && (
                   <button
                     onClick={() => setConfirmAction("suspend")}
-                    className="w-full h-11 rounded-xl bg-amber-500 text-white text-sm font-semibold hover:bg-amber-600 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    disabled={!isOnline}
+                    title={isOnline ? undefined : "No internet connection"}
+                    className="w-full h-11 rounded-xl bg-amber-500 text-white text-sm font-semibold hover:bg-amber-600 transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <PauseCircle className="w-4 h-4" />
                     Suspend Rider
