@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useDispatch } from "react-redux"
-import { tokenRefreshed, initializationComplete, logout } from "../features/auth/authSlice"
+import { tokenRefreshed, initializationComplete, sessionPreservedOffline, logout } from "../features/auth/authSlice"
 import { ADMIN_STORAGE_KEYS } from "../constants/storageKeys"
 import { BASE_URL } from "../constants/api"
 
@@ -38,11 +38,24 @@ const AuthInitializer = ({ children }) => {
             })
           )
         } else {
+          // Server explicitly rejected the refresh token — genuine session expiry.
           dispatch(logout())
         }
       })
       .catch(() => {
-        dispatch(logout())
+        // Network error (offline, DNS failure, timeout) — NOT a genuine logout.
+        // Restore the user from storage so the app stays open. The access token
+        // is null, so useTokenRefresh will re-exchange as soon as internet returns.
+        const raw =
+          localStorage.getItem(ADMIN_STORAGE_KEYS.USER) ??
+          sessionStorage.getItem(ADMIN_STORAGE_KEYS.USER)
+        const user = JSON.parse(raw || "null")
+
+        if (user) {
+          dispatch(sessionPreservedOffline({ user }))
+        } else {
+          dispatch(logout())
+        }
       })
       .finally(() => {
         dispatch(initializationComplete())

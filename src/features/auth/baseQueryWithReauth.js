@@ -16,6 +16,11 @@ const rawBaseQuery = fetchBaseQuery({
 // only one refresh call is made; the rest wait on the same promise.
 let refreshPromise = null
 
+// ── Sentinels returned by performRefresh ──────────────────────────────────────
+// true           → refreshed successfully, caller should retry the original request
+// false          → server rejected the token, logout already dispatched
+// 'network_error'→ could not reach the server, session preserved, do NOT logout
+
 const performRefresh = async (api, extraOptions) => {
   const refreshToken =
     localStorage.getItem(ADMIN_STORAGE_KEYS.REFRESH_TOKEN) ??
@@ -32,12 +37,27 @@ const performRefresh = async (api, extraOptions) => {
     extraOptions
   )
 
+  // Network-level failure (no internet, DNS, timeout) — the refresh token is
+  // still valid; we just could not reach the server. Return a sentinel so the
+  // caller knows NOT to logout.
+  if (result.error?.status === "FETCH_ERROR" || result.error?.status === "TIMEOUT_ERROR") {
+    return "network_error"
+  }
+
+  // Any other error (4xx from the refresh endpoint) means the token is genuinely
+  // invalid or revoked — end the session.
+  if (result.error) {
+    api.dispatch(logout())
+    return false
+  }
+
   if (result.data?.success) {
     const { accessToken, refreshToken: newRefreshToken } = result.data.data
     api.dispatch(tokenRefreshed({ accessToken, refreshToken: newRefreshToken }))
     return true
   }
 
+  // Unexpected response shape — treat as genuine rejection.
   api.dispatch(logout())
   return false
 }
@@ -65,9 +85,22 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
     }
 
     const refreshed = await refreshPromise
-    if (refreshed) {
+
+    if (refreshed === true) {
+      // Token successfully rotated — retry the original request.
       result = await rawBaseQuery(args, api, extraOptions)
+    } else if (refreshed === "network_error") {
+      // Could not reach refresh endpoint — session is preserved but we cannot
+      // complete this request right now. Surface the network error to the
+      // component without touching auth state.
+      result = {
+        error: {
+          status: "FETCH_ERROR",
+          error: "No internet connection. Please check your network and try again.",
+        },
+      }
     }
+    // refreshed === false → logout already dispatched in performRefresh, nothing more to do.
   }
 
   return result

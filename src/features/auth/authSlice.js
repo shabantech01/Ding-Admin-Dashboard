@@ -8,6 +8,7 @@ const authSlice = createSlice({
     user: null,
     isAuthenticated: false,
     isInitializing: true,
+    isOfflineSession: false, // true while session is preserved but token refresh failed due to network
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -26,11 +27,21 @@ const authSlice = createSlice({
       const { accessToken, refreshToken } = action.payload
       state.accessToken = accessToken
       state.isAuthenticated = true
+      state.isOfflineSession = false // session is live again
 
       // Rotate into whichever storage the original token was in
       const inLocal = !!localStorage.getItem(ADMIN_STORAGE_KEYS.REFRESH_TOKEN)
       const storage = inLocal ? localStorage : sessionStorage
       storage.setItem(ADMIN_STORAGE_KEYS.REFRESH_TOKEN, refreshToken)
+    },
+
+    // Called when page loads or refresh fails due to network loss — not a real logout.
+    // Keeps the user in the app using stored user data until connectivity returns.
+    sessionPreservedOffline: (state, action) => {
+      state.user = action.payload.user
+      state.isAuthenticated = true
+      state.accessToken = null
+      state.isOfflineSession = true
     },
 
     // Called by AuthInitializer once the initial session check resolves
@@ -51,5 +62,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { setCredentials, tokenRefreshed, initializationComplete, logout } = authSlice.actions
+export const { setCredentials, tokenRefreshed, initializationComplete, sessionPreservedOffline, logout } = authSlice.actions
 export default authSlice.reducer
