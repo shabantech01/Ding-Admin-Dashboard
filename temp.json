@@ -1,0 +1,2016 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "6",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Only garlic mayo.",
+      "placedAt": "2026-08-18T13:01:56.311Z",
+      "confirmedAt": "2026-08-18T13:02:11.984Z",
+      "preparingAt": "2026-08-18T13:02:25.493Z",
+      "readyForPickupAt": "2026-08-18T13:02:33.075Z",
+      "pickedUpAt": "2026-08-18T13:55:14.155Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-18T13:56:16.892Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T13:01:56.311Z",
+      "updatedAt": "2026-08-18T13:56:16.892Z",
+      "items": [
+        {
+          "id": "bf9a6b89-6870-4777-a85d-830d7d870d71",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Garlic"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "dd015d7e-c16d-4ec9-81fa-a8b3ddb47631",
+        "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+        "amount": "6",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T13:01:56.319Z",
+        "updatedAt": "2026-08-18T13:01:56.319Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "67945340-4a24-4d8e-99cb-710541c0297b",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T13:56:16.894Z"
+        },
+        {
+          "id": "641ae0cc-b27c-49b2-867e-7b0785579379",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T13:55:14.161Z"
+        },
+        {
+          "id": "fb761d47-aefc-4d72-ad67-f2d24c0e2e39",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T13:02:44.488Z"
+        },
+        {
+          "id": "55ee8744-f883-483e-ab46-9a46fa271966",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T13:02:33.077Z"
+        },
+        {
+          "id": "4f1d5d89-0c61-4573-8e50-c18b697b50d4",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T13:02:25.495Z"
+        },
+        {
+          "id": "b39b5f7f-71ec-48be-aca9-7aa696565e54",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T13:02:11.987Z"
+        },
+        {
+          "id": "cc80f311-7ac0-4b31-823e-c98183735ff0",
+          "orderId": "f7121c90-4fa3-4924-96c6-57251cb1c8eb",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T13:01:56.317Z"
+        }
+      ]
+    },
+    {
+      "id": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "PICKED_UP",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "564",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Made it creamy and up to the mark as guests are waiting.",
+      "placedAt": "2026-08-18T11:01:55.611Z",
+      "confirmedAt": "2026-08-18T11:05:14.342Z",
+      "preparingAt": "2026-08-18T11:05:41.381Z",
+      "readyForPickupAt": "2026-08-18T11:05:47.339Z",
+      "pickedUpAt": "2026-08-20T10:36:14.677Z",
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T11:01:55.611Z",
+      "updatedAt": "2026-08-20T10:36:14.678Z",
+      "items": [
+        {
+          "id": "65a819db-9c9c-4b79-85f7-749be35ec39d",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "menuItemId": "34bbbb94-56a8-4dd3-b85a-8b86c104cd57",
+          "quantity": 1,
+          "unitPrice": "564",
+          "totalPrice": "564",
+          "modifiers": [
+            {
+              "name": "Doe/Crust",
+              "options": [
+                "Hand Toast"
+              ]
+            },
+            {
+              "name": "Extra Toppings",
+              "options": [
+                "Extra Beef Strips",
+                "Extra Cheese"
+              ]
+            },
+            {
+              "name": "Sizing",
+              "options": [
+                "Family Size 18''"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "34bbbb94-56a8-4dd3-b85a-8b86c104cd57",
+            "name": "Small Beef Strips Pizza",
+            "photo": "menu-items/photos/5ad08a6c-1e70-4dfa-a2ab-68fa41ad396a.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "2e1f3d22-07f5-45ea-bb54-546ca0a95a1f",
+        "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+        "amount": "564",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T11:01:55.621Z",
+        "updatedAt": "2026-08-18T11:01:55.621Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "ac12e2f2-cfd6-4e01-8f74-003af3843307",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-20T10:36:14.689Z"
+        },
+        {
+          "id": "ebffaa6c-db16-4bcb-936f-f045f1e553b7",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T11:06:11.657Z"
+        },
+        {
+          "id": "3bde49de-284f-4dbc-baff-f126516ec235",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T11:05:47.341Z"
+        },
+        {
+          "id": "125adafc-6794-47d1-82a6-880d766f3a48",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T11:05:41.383Z"
+        },
+        {
+          "id": "f8dc91fc-b970-4c16-a99d-f0a4b729374f",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T11:05:14.346Z"
+        },
+        {
+          "id": "88b1e45e-9a1b-49fd-8311-d538c4c49446",
+          "orderId": "5b6acd3f-9b22-4135-8506-a242ae0949c5",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T11:01:55.617Z"
+        }
+      ]
+    },
+    {
+      "id": "97c6d25d-b215-4edf-890c-85b045b06296",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "25",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Simple plain soup with your tastemaker.",
+      "placedAt": "2026-08-18T09:34:25.624Z",
+      "confirmedAt": "2026-08-18T09:34:49.598Z",
+      "preparingAt": "2026-08-18T09:35:00.984Z",
+      "readyForPickupAt": "2026-08-18T09:35:04.445Z",
+      "pickedUpAt": "2026-08-18T09:37:01.538Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-18T09:38:24.656Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T09:34:25.624Z",
+      "updatedAt": "2026-08-18T09:38:24.657Z",
+      "items": [
+        {
+          "id": "542ed2ef-8081-4a4d-9bda-22eb38b84797",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "menuItemId": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+          "quantity": 1,
+          "unitPrice": "25",
+          "totalPrice": "25",
+          "modifiers": [],
+          "menuItem": {
+            "id": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+            "name": "Chicke Corn Soup",
+            "photo": "menu-items/photos/c720140a-e473-4be5-b89a-737542d67327.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "6c496a96-be15-4c98-9926-5b279b1b9cc0",
+        "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+        "amount": "25",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T09:34:25.632Z",
+        "updatedAt": "2026-08-18T09:34:25.632Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "6c6e4319-a31d-4403-b4b2-4f2d529c1f21",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:38:24.658Z"
+        },
+        {
+          "id": "2e556f40-17f9-4122-812e-2d5d948f1840",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:37:01.564Z"
+        },
+        {
+          "id": "d2a63a80-3b48-4d24-bc81-be3f25dfaba0",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:36:44.074Z"
+        },
+        {
+          "id": "7737b5d9-d21f-4320-a8cb-261e06dae715",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:35:04.449Z"
+        },
+        {
+          "id": "c48f066d-7c25-418b-93de-5f40e4893331",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:35:00.986Z"
+        },
+        {
+          "id": "4c5063f4-7559-4efc-bb9c-861091872874",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:34:49.600Z"
+        },
+        {
+          "id": "2919c476-e6d2-4009-9f81-3562c61b4850",
+          "orderId": "97c6d25d-b215-4edf-890c-85b045b06296",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T09:34:25.630Z"
+        }
+      ]
+    },
+    {
+      "id": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "PICKED_UP",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "6",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Please prepare it in a hurry, I’ve guests waiting.",
+      "placedAt": "2026-08-18T09:16:03.065Z",
+      "confirmedAt": "2026-08-18T09:16:35.142Z",
+      "preparingAt": "2026-08-18T09:16:44.301Z",
+      "readyForPickupAt": "2026-08-18T09:16:54.697Z",
+      "pickedUpAt": "2026-08-18T09:19:02.257Z",
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T09:16:03.065Z",
+      "updatedAt": "2026-08-18T09:19:02.258Z",
+      "items": [
+        {
+          "id": "2dd01a56-8cc8-4a31-b576-37f8c27dc1fa",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "8e7f4e04-883f-4517-be9b-f6d29cb62dd3",
+        "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+        "amount": "6",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T09:16:03.078Z",
+        "updatedAt": "2026-08-18T09:16:03.078Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "f73a3d10-7479-4207-95e3-b88cf866b7ed",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:19:02.261Z"
+        },
+        {
+          "id": "ec13fe5a-948c-4b67-92a4-0f743181a4db",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:18:26.424Z"
+        },
+        {
+          "id": "a5cdd886-58eb-49df-9193-3db0f120bf02",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:16:54.700Z"
+        },
+        {
+          "id": "5f9ad226-acab-46ae-a79c-2fbef4309787",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:16:44.304Z"
+        },
+        {
+          "id": "e6cd23c9-2c91-41ca-be4f-0ebfe58e1f6b",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:16:35.144Z"
+        },
+        {
+          "id": "db982153-01b0-47ee-8e0b-1934e430d8a4",
+          "orderId": "142a08e3-1fe6-4515-830b-3bcc1c03b523",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T09:16:03.074Z"
+        }
+      ]
+    },
+    {
+      "id": "c263598e-8467-4128-9f45-74da748e0b00",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "66",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Paid please made them special and deliver them quickly.",
+      "placedAt": "2026-08-18T09:00:31.838Z",
+      "confirmedAt": "2026-08-18T09:01:06.385Z",
+      "preparingAt": "2026-08-18T09:01:10.444Z",
+      "readyForPickupAt": "2026-08-18T09:01:13.391Z",
+      "pickedUpAt": "2026-08-18T09:02:02.724Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-18T09:03:05.140Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T09:00:31.838Z",
+      "updatedAt": "2026-08-18T09:03:05.141Z",
+      "items": [
+        {
+          "id": "7232391b-e85c-4a47-8bda-80650246fa7b",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "menuItemId": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+          "quantity": 1,
+          "unitPrice": "60",
+          "totalPrice": "60",
+          "modifiers": [
+            {
+              "name": "Sallad",
+              "options": [
+                "Want Sallad"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+            "name": "Beef Burger",
+            "photo": "menu-items/photos/3fe15583-8cbe-46a0-9dd6-792c54f74d32.jpg"
+          }
+        },
+        {
+          "id": "fe66d800-b532-494a-b908-e987bc92f8a9",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "78aa887d-ef32-496a-9771-8e44b23c143d",
+        "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+        "amount": "66",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T09:00:31.849Z",
+        "updatedAt": "2026-08-18T09:00:31.849Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "28d8a4b4-76af-4c65-bf1d-122b353be56b",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:03:05.144Z"
+        },
+        {
+          "id": "977448f8-bf34-492e-94ab-651dcf7d8d85",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:02:02.729Z"
+        },
+        {
+          "id": "fef504b2-f8e1-4d1f-ae12-cc6567e921be",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T09:01:25.756Z"
+        },
+        {
+          "id": "7148c2f9-3306-412f-8350-5dd0d537888a",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:01:13.394Z"
+        },
+        {
+          "id": "a59fdd2f-fd28-4cf1-a21d-4d7ed68d96d6",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:01:10.447Z"
+        },
+        {
+          "id": "6406781b-ff28-40b5-92b4-fc89de896ac1",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T09:01:06.387Z"
+        },
+        {
+          "id": "7089681a-f2e4-484b-bfe8-38d80f40ffae",
+          "orderId": "c263598e-8467-4128-9f45-74da748e0b00",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T09:00:31.847Z"
+        }
+      ]
+    },
+    {
+      "id": "858fecd6-977e-4830-ab74-d2b61f351195",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "PICKED_UP",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "420",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.82155289999998,
+      "deliveryLng": 73.46607829999996,
+      "customerNote": "Come quick as guests are waiting…",
+      "placedAt": "2026-08-18T07:42:13.350Z",
+      "confirmedAt": "2026-08-18T07:42:56.027Z",
+      "preparingAt": "2026-08-18T07:42:58.718Z",
+      "readyForPickupAt": "2026-08-18T07:43:02.533Z",
+      "pickedUpAt": "2026-08-18T07:48:06.447Z",
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-18T07:42:13.350Z",
+      "updatedAt": "2026-08-18T07:48:06.448Z",
+      "items": [
+        {
+          "id": "52132ebb-f8b4-46a6-8026-96c85d52cb57",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "menuItemId": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+          "quantity": 4,
+          "unitPrice": "105",
+          "totalPrice": "420",
+          "modifiers": [
+            {
+              "name": "2nd extras",
+              "options": [
+                "eggs",
+                "mayo"
+              ]
+            },
+            {
+              "name": "extras",
+              "options": [
+                "test-topping-2"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+            "name": "testing prod. name",
+            "photo": "menu-items/photos/553e6436-779a-4c32-8fb4-9ab5ac36b967.jpeg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "a02167bb-eca5-4f5e-8c9d-ef56aa30fb2b",
+        "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+        "amount": "420",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-18T07:42:13.360Z",
+        "updatedAt": "2026-08-18T07:42:13.360Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "1b0230fe-0df1-4cf0-b207-a27ebe323c01",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T07:48:06.451Z"
+        },
+        {
+          "id": "8fbc942a-4a99-485c-b5ed-eef1c643597d",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-18T07:44:40.080Z"
+        },
+        {
+          "id": "a08a6f6f-8071-423e-b099-ef9429310a5a",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T07:43:02.536Z"
+        },
+        {
+          "id": "5fc01646-1769-4af3-9d1a-a921c17c7fad",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T07:42:58.721Z"
+        },
+        {
+          "id": "6ae3b142-debb-45ed-87f2-1d46f7139a34",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-18T07:42:56.031Z"
+        },
+        {
+          "id": "166482cf-6a1f-4def-9941-66fc75db11d1",
+          "orderId": "858fecd6-977e-4830-ab74-d2b61f351195",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-18T07:42:13.356Z"
+        }
+      ]
+    },
+    {
+      "id": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "204",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.8079701,
+      "deliveryLng": 73.44435440000001,
+      "customerNote": "Testing notes 2 same orders made them special as they’re for my guests.",
+      "placedAt": "2026-08-17T08:17:43.749Z",
+      "confirmedAt": "2026-08-17T08:18:08.093Z",
+      "preparingAt": "2026-08-17T08:18:39.103Z",
+      "readyForPickupAt": "2026-08-17T08:18:50.538Z",
+      "pickedUpAt": "2026-08-17T08:19:53.389Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-17T08:20:15.843Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-17T08:17:43.749Z",
+      "updatedAt": "2026-08-17T08:20:15.844Z",
+      "items": [
+        {
+          "id": "ccdfb930-c765-46b9-946c-201ec43f98af",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "menuItemId": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+          "quantity": 2,
+          "unitPrice": "102",
+          "totalPrice": "204",
+          "modifiers": [
+            {
+              "name": "extras",
+              "options": [
+                "test-topping-2"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+            "name": "testing prod. name",
+            "photo": "menu-items/photos/553e6436-779a-4c32-8fb4-9ab5ac36b967.jpeg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "a3fef211-fb30-47d9-87e0-e0be662c8f5b",
+        "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+        "amount": "204",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-17T08:17:43.772Z",
+        "updatedAt": "2026-08-17T08:17:43.772Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "f6af5749-1e81-499f-ba81-92ec924d76a2",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:20:15.847Z"
+        },
+        {
+          "id": "f688f3c0-bd0b-4dc9-a332-24481944fa88",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:19:53.394Z"
+        },
+        {
+          "id": "cd9da2fa-0553-4265-bf3f-474a34ae54c7",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:19:25.565Z"
+        },
+        {
+          "id": "acb9935e-60ae-4180-8611-4edf8ec26210",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-17T08:18:50.540Z"
+        },
+        {
+          "id": "eb3c0fb4-4838-44a5-be61-fcf5f8fe9361",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-17T08:18:39.106Z"
+        },
+        {
+          "id": "d1765651-dc66-48a4-ac2c-86025fd793eb",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-17T08:18:08.096Z"
+        },
+        {
+          "id": "1b2c27e3-b7e3-4c9b-b51f-6936936b273c",
+          "orderId": "a64fa24c-1005-411e-91cc-b9e36d101df9",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-17T08:17:43.766Z"
+        }
+      ]
+    },
+    {
+      "id": "c05a9250-0384-4ed2-9b33-f8b065e1cbe5",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "CANCELLED",
+      "assignedRiderId": null,
+      "totalAmount": "6",
+      "deliveryAddress": "Islamabad, Islamabad Capital Territory, Pakistan",
+      "deliveryLat": 33.71200779999999,
+      "deliveryLng": 73.10419000000005,
+      "customerNote": null,
+      "placedAt": "2026-08-13T08:04:30.377Z",
+      "confirmedAt": null,
+      "preparingAt": null,
+      "readyForPickupAt": null,
+      "pickedUpAt": null,
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": "2026-08-13T08:04:43.493Z",
+      "createdAt": "2026-08-13T08:04:30.377Z",
+      "updatedAt": "2026-08-13T08:04:43.494Z",
+      "items": [
+        {
+          "id": "8de69925-fad6-49c1-a823-c3730df1ba4a",
+          "orderId": "c05a9250-0384-4ed2-9b33-f8b065e1cbe5",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "e8b27e22-1b78-4f96-bbbf-bb425fad3a55",
+        "orderId": "c05a9250-0384-4ed2-9b33-f8b065e1cbe5",
+        "amount": "6",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-13T08:04:30.382Z",
+        "updatedAt": "2026-08-13T08:04:30.382Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "a464e654-c811-4e4e-b853-41443f2a19c4",
+          "orderId": "c05a9250-0384-4ed2-9b33-f8b065e1cbe5",
+          "fromStatus": "PLACED",
+          "toStatus": "CANCELLED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T08:04:43.495Z"
+        },
+        {
+          "id": "4becf2e1-8892-4835-943f-0d04df23eaae",
+          "orderId": "c05a9250-0384-4ed2-9b33-f8b065e1cbe5",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-13T08:04:30.380Z"
+        }
+      ]
+    },
+    {
+      "id": "faef19f8-b072-4f36-879b-f1460566a6eb",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "ASSIGNED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "204",
+      "deliveryAddress": "Mogale City NU, Gauteng, South Africa",
+      "deliveryLat": -25.93611860000001,
+      "deliveryLng": 27.79326980000002,
+      "customerNote": "Make them special I’ve two guests Adam and scot.",
+      "placedAt": "2026-08-13T08:00:17.688Z",
+      "confirmedAt": "2026-08-13T08:00:42.017Z",
+      "preparingAt": "2026-08-17T08:30:02.924Z",
+      "readyForPickupAt": "2026-08-17T08:30:11.144Z",
+      "pickedUpAt": null,
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-13T08:00:17.688Z",
+      "updatedAt": "2026-08-17T08:30:23.104Z",
+      "items": [
+        {
+          "id": "bbf6fe97-0b90-4c2b-862d-f8b4cb31a7f1",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "menuItemId": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+          "quantity": 2,
+          "unitPrice": "102",
+          "totalPrice": "204",
+          "modifiers": [
+            {
+              "name": "extras",
+              "options": [
+                "test-topping-2"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "0a5d8b3c-441f-4273-a0d3-b9b280fa84c2",
+            "name": "testing prod. name",
+            "photo": "menu-items/photos/553e6436-779a-4c32-8fb4-9ab5ac36b967.jpeg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "5bf7165e-8148-4668-95b1-2119cda87d84",
+        "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+        "amount": "204",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-13T08:00:17.697Z",
+        "updatedAt": "2026-08-13T08:00:17.697Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "43c3792c-1e38-4708-a2d6-df439fbf2b9e",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:30:23.109Z"
+        },
+        {
+          "id": "a4a046c6-60c1-44c7-9ce1-b218805c7679",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-17T08:30:11.148Z"
+        },
+        {
+          "id": "491b24e1-1c33-41a2-831b-962c7e4688d0",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-17T08:30:02.946Z"
+        },
+        {
+          "id": "f642af82-eb8c-4dab-b8e3-09aa5ea51811",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T08:00:42.021Z"
+        },
+        {
+          "id": "ff523853-6f98-4d71-a204-6a2dced2839c",
+          "orderId": "faef19f8-b072-4f36-879b-f1460566a6eb",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-13T08:00:17.695Z"
+        }
+      ]
+    },
+    {
+      "id": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "ASSIGNED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "71",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.8079701,
+      "deliveryLng": 73.44435440000001,
+      "customerNote": null,
+      "placedAt": "2026-08-13T07:51:04.283Z",
+      "confirmedAt": "2026-08-13T07:51:46.348Z",
+      "preparingAt": "2026-08-13T07:51:54.368Z",
+      "readyForPickupAt": "2026-08-13T07:52:05.770Z",
+      "pickedUpAt": null,
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-13T07:51:04.283Z",
+      "updatedAt": "2026-08-13T07:54:12.960Z",
+      "items": [
+        {
+          "id": "3537d616-0b2f-4930-9de6-879cf3175aff",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "menuItemId": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+          "quantity": 1,
+          "unitPrice": "65",
+          "totalPrice": "65",
+          "modifiers": [
+            {
+              "name": "Sallad",
+              "options": [
+                "Want Sallad"
+              ]
+            },
+            {
+              "name": "Extras",
+              "options": [
+                "Extra Egg Wrapping"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+            "name": "Beef Burger",
+            "photo": "menu-items/photos/3fe15583-8cbe-46a0-9dd6-792c54f74d32.jpg"
+          }
+        },
+        {
+          "id": "a812754d-ab86-4e62-8533-c47e3f296c15",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "b07ae828-1249-4eef-9f41-55b31eb09f9f",
+        "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+        "amount": "71",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-13T07:51:04.296Z",
+        "updatedAt": "2026-08-13T07:51:04.296Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "d03d5efd-b9d6-4586-b658-cd8687fa4fe8",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-13T07:54:12.965Z"
+        },
+        {
+          "id": "1033e763-0f1d-42eb-89e6-7f51364064ae",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T07:52:05.772Z"
+        },
+        {
+          "id": "1a980b38-f1eb-423a-8557-04968a6feace",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T07:51:54.371Z"
+        },
+        {
+          "id": "dd2e3ea6-6524-4712-be77-44d9248efc19",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T07:51:46.351Z"
+        },
+        {
+          "id": "9665a803-ddc2-46cd-b6f1-780f16e1a744",
+          "orderId": "dde6b66f-83be-445c-9e71-c110ebb526a7",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-13T07:51:04.290Z"
+        }
+      ]
+    },
+    {
+      "id": "ae1b9841-840c-4171-965a-7a26822811b1",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "ASSIGNED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "71",
+      "deliveryAddress": "Okara, Punjab, Pakistan",
+      "deliveryLat": 30.8079701,
+      "deliveryLng": 73.44435440000001,
+      "customerNote": null,
+      "placedAt": "2026-08-13T05:12:15.242Z",
+      "confirmedAt": "2026-08-13T05:46:23.958Z",
+      "preparingAt": "2026-08-13T05:48:21.462Z",
+      "readyForPickupAt": "2026-08-13T05:48:51.171Z",
+      "pickedUpAt": null,
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-13T05:12:15.242Z",
+      "updatedAt": "2026-08-13T05:50:57.375Z",
+      "items": [
+        {
+          "id": "104242c3-456f-4496-a2bf-7f13fe217e61",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "menuItemId": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+          "quantity": 1,
+          "unitPrice": "65",
+          "totalPrice": "65",
+          "modifiers": [
+            {
+              "name": "Extras",
+              "options": [
+                "Extra Egg Wrapping"
+              ]
+            },
+            {
+              "name": "Sallad",
+              "options": [
+                "Want Sallad"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+            "name": "Beef Burger",
+            "photo": "menu-items/photos/3fe15583-8cbe-46a0-9dd6-792c54f74d32.jpg"
+          }
+        },
+        {
+          "id": "1b272b68-fac3-4b94-b578-8bb54885bb6b",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "8ffb62e9-a622-4ca4-8378-e3e0b4fda71e",
+        "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+        "amount": "71",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-13T05:12:15.256Z",
+        "updatedAt": "2026-08-13T05:12:15.256Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "d1311f18-a2d1-4156-836f-d52192191bb9",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-13T05:50:57.381Z"
+        },
+        {
+          "id": "9ed40d8d-3cf3-4c08-ab5b-1f688c0b6aa2",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T05:48:51.174Z"
+        },
+        {
+          "id": "ee8d40e0-bf60-46da-8040-e9ea731844eb",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T05:48:21.467Z"
+        },
+        {
+          "id": "8ad63c87-4695-42eb-8a9a-9167319ef2f1",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-13T05:46:23.962Z"
+        },
+        {
+          "id": "cb2fd0ee-172f-48f3-952c-12d00eeca39d",
+          "orderId": "ae1b9841-840c-4171-965a-7a26822811b1",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-13T05:12:15.255Z"
+        }
+      ]
+    },
+    {
+      "id": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "100",
+      "deliveryAddress": "Home · 2464 Royal Ln. Mesa, New Jersey 45463",
+      "deliveryLat": null,
+      "deliveryLng": null,
+      "customerNote": null,
+      "placedAt": "2026-08-11T07:46:00.469Z",
+      "confirmedAt": "2026-08-11T08:34:11.244Z",
+      "preparingAt": "2026-08-11T09:01:10.270Z",
+      "readyForPickupAt": "2026-08-11T09:01:17.888Z",
+      "pickedUpAt": "2026-08-17T08:28:43.373Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-17T08:28:52.990Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-11T07:46:00.469Z",
+      "updatedAt": "2026-08-17T08:28:52.991Z",
+      "items": [
+        {
+          "id": "39536401-7f56-4d70-ae9f-091ae25fc8ad",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "menuItemId": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+          "quantity": 1,
+          "unitPrice": "70",
+          "totalPrice": "70",
+          "modifiers": [
+            {
+              "name": "Sallad",
+              "options": [
+                "Without Sallad"
+              ]
+            },
+            {
+              "name": "Extras",
+              "options": [
+                "Extra Cheese Slice"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+            "name": "Beef Burger",
+            "photo": "menu-items/photos/3fe15583-8cbe-46a0-9dd6-792c54f74d32.jpg"
+          }
+        },
+        {
+          "id": "cc046a39-85fb-46ca-a4c5-6b21155a0eb5",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "menuItemId": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+          "quantity": 1,
+          "unitPrice": "30",
+          "totalPrice": "30",
+          "modifiers": [
+            {
+              "name": "Eggs",
+              "options": [
+                "Extra Egg"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+            "name": "Chicke Corn Soup",
+            "photo": "menu-items/photos/c720140a-e473-4be5-b89a-737542d67327.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "b7764fea-86c0-456e-8c26-1e130f63a068",
+        "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+        "amount": "100",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-11T07:46:00.479Z",
+        "updatedAt": "2026-08-11T07:46:00.479Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "07fc26f7-0e02-424a-8224-1a99d72ca5b2",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:28:52.992Z"
+        },
+        {
+          "id": "a3cdd2f1-8230-49d5-9e90-5b493b5cc48a",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:28:43.376Z"
+        },
+        {
+          "id": "cf2f10fa-1839-4134-b11d-af9bd92cc89a",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:27:10.217Z"
+        },
+        {
+          "id": "7ea3d535-2ce0-4c3c-9f4c-52a51f90aa56",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:01:17.890Z"
+        },
+        {
+          "id": "bf13e599-8c60-48be-a9ee-8be919999c65",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:01:10.273Z"
+        },
+        {
+          "id": "c1bf15a1-0615-4000-a553-e65b7ce32b73",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T08:34:11.249Z"
+        },
+        {
+          "id": "1cc88140-6460-4df7-b7aa-b1dd461e525d",
+          "orderId": "27b3d191-13ca-41c6-a9bd-d4958284cd2a",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-11T07:46:00.476Z"
+        }
+      ]
+    },
+    {
+      "id": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "ASSIGNED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "30",
+      "deliveryAddress": "Home · 2464 Royal Ln. Mesa, New Jersey 45463",
+      "deliveryLat": null,
+      "deliveryLng": null,
+      "customerNote": "Only soup with egg.",
+      "placedAt": "2026-08-11T07:44:45.852Z",
+      "confirmedAt": "2026-08-11T08:49:19.130Z",
+      "preparingAt": "2026-08-11T09:18:42.166Z",
+      "readyForPickupAt": "2026-08-11T09:18:44.223Z",
+      "pickedUpAt": null,
+      "onTheWayAt": null,
+      "deliveredAt": null,
+      "cancelledAt": null,
+      "createdAt": "2026-08-11T07:44:45.852Z",
+      "updatedAt": "2026-08-12T08:41:01.474Z",
+      "items": [
+        {
+          "id": "7cdd02fd-42b6-4ce4-a07d-83693358c8ca",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "menuItemId": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+          "quantity": 1,
+          "unitPrice": "30",
+          "totalPrice": "30",
+          "modifiers": [
+            {
+              "name": "Eggs",
+              "options": [
+                "Extra Egg"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7c9f7bd6-98b1-45c2-a986-5a8fb1a517a5",
+            "name": "Chicke Corn Soup",
+            "photo": "menu-items/photos/c720140a-e473-4be5-b89a-737542d67327.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "ff64dbcb-1202-4f04-89a1-c57b699a8121",
+        "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+        "amount": "30",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-11T07:44:45.867Z",
+        "updatedAt": "2026-08-11T07:44:45.867Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "9d0b3de1-3e7d-4535-acfd-914c357c2a3a",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-12T08:41:01.531Z"
+        },
+        {
+          "id": "9ee11fd2-2429-4b34-becc-961eb14cc39a",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:18:44.226Z"
+        },
+        {
+          "id": "8016890a-d203-4f16-a4c0-0a94a34fb8c7",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:18:42.168Z"
+        },
+        {
+          "id": "584cc460-a4dd-455c-b2b3-18731c547896",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T08:49:19.134Z"
+        },
+        {
+          "id": "b08c9411-f096-40bd-90f2-fc7093a562aa",
+          "orderId": "68fcc65a-5dc2-494d-b158-04e99f4a81cf",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-11T07:44:45.863Z"
+        }
+      ]
+    },
+    {
+      "id": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "6",
+      "deliveryAddress": "Home · 2464 Royal Ln. Mesa, New Jersey 45463",
+      "deliveryLat": null,
+      "deliveryLng": null,
+      "customerNote": "Herbs add them to much.",
+      "placedAt": "2026-08-10T14:40:46.833Z",
+      "confirmedAt": "2026-08-11T09:17:11.051Z",
+      "preparingAt": "2026-08-11T09:17:23.506Z",
+      "readyForPickupAt": "2026-08-11T09:17:32.497Z",
+      "pickedUpAt": "2026-08-17T08:24:14.431Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-17T08:26:30.437Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-10T14:40:46.833Z",
+      "updatedAt": "2026-08-17T08:26:30.438Z",
+      "items": [
+        {
+          "id": "6bc05d9a-d3e6-4f27-804b-9f20f52a30ba",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Herbs"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "7b56a4a5-c033-43d4-9c58-5ebdad2dbb14",
+        "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+        "amount": "6",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-10T14:40:46.838Z",
+        "updatedAt": "2026-08-10T14:40:46.838Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "e435cb51-9a4a-4e7f-8ebe-c1a038ced111",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:26:30.440Z"
+        },
+        {
+          "id": "ae305323-38f5-4123-ade7-1f4fd0915931",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:24:14.433Z"
+        },
+        {
+          "id": "2367cb48-99c5-4b62-9ab0-8b33a07512b6",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:23:39.217Z"
+        },
+        {
+          "id": "12b5e9b9-1acc-4fd9-b25a-6e87b68ee99a",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:17:32.500Z"
+        },
+        {
+          "id": "355acbf6-aad0-45d3-acd1-046b4211e215",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:17:23.508Z"
+        },
+        {
+          "id": "bbe7e8a6-d78d-4c1d-a9d6-16d00c110ce4",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T09:17:11.054Z"
+        },
+        {
+          "id": "c2ac6f6f-6f21-4a7e-bd07-5d06f00d149c",
+          "orderId": "84dd0a91-cc82-49ba-9a95-e18b810ae563",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-10T14:40:46.837Z"
+        }
+      ]
+    },
+    {
+      "id": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+      "customerId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+      "branchId": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+      "status": "DELIVERED",
+      "assignedRiderId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+      "totalAmount": "111",
+      "deliveryAddress": "Home · 2464 Royal Ln. Mesa, New Jersey 45463",
+      "deliveryLat": null,
+      "deliveryLng": null,
+      "customerNote": "Made them so special as I’ve guest visiting today.",
+      "placedAt": "2026-08-10T13:37:42.610Z",
+      "confirmedAt": "2026-08-11T08:50:39.252Z",
+      "preparingAt": "2026-08-12T15:57:58.616Z",
+      "readyForPickupAt": "2026-08-12T16:35:41.111Z",
+      "pickedUpAt": "2026-08-17T08:22:12.643Z",
+      "onTheWayAt": null,
+      "deliveredAt": "2026-08-17T08:22:40.132Z",
+      "cancelledAt": null,
+      "createdAt": "2026-08-10T13:37:42.610Z",
+      "updatedAt": "2026-08-17T08:22:40.133Z",
+      "items": [
+        {
+          "id": "fa82eec3-dd8e-41b2-8fbe-efd9fa94dcbd",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "menuItemId": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+          "quantity": 1,
+          "unitPrice": "105",
+          "totalPrice": "105",
+          "modifiers": [
+            {
+              "name": "Sallad",
+              "options": [
+                "Want Sallad"
+              ]
+            },
+            {
+              "name": "Extras",
+              "options": [
+                "Extra Cheese Slice",
+                "Extra Beef Petty",
+                "Extra Egg Wrapping"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "1e5288ca-0591-424d-8e03-cbb7abecd9fa",
+            "name": "Beef Burger",
+            "photo": "menu-items/photos/3fe15583-8cbe-46a0-9dd6-792c54f74d32.jpg"
+          }
+        },
+        {
+          "id": "fa0da5fd-96cb-4d7f-a042-0153637e299d",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "menuItemId": "7f592af8-fd4b-4760-8279-71d79f011e09",
+          "quantity": 1,
+          "unitPrice": "6",
+          "totalPrice": "6",
+          "modifiers": [
+            {
+              "name": "Extra Garnishing",
+              "options": [
+                "Garlic"
+              ]
+            }
+          ],
+          "menuItem": {
+            "id": "7f592af8-fd4b-4760-8279-71d79f011e09",
+            "name": "Dip Sauce",
+            "photo": "menu-items/photos/a7f7762d-113a-4e57-a92f-b4315248fdd0.jpg"
+          }
+        }
+      ],
+      "customer": {
+        "id": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+        "name": "Shaban Ali User",
+        "phone": null
+      },
+      "branch": {
+        "id": "9ac1123c-d0c4-4a3d-a7ac-8587049e9089",
+        "name": "Tester's Cafe",
+        "lat": 30.82193178728035,
+        "lng": 73.46106266372125
+      },
+      "payment": {
+        "id": "872112e0-095b-4d1a-9761-30783a2cd6d5",
+        "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+        "amount": "111",
+        "currency": "ZAR",
+        "method": "CARD",
+        "status": "PENDING",
+        "stitchPaymentId": null,
+        "platformFee": null,
+        "createdAt": "2026-08-10T13:37:42.627Z",
+        "updatedAt": "2026-08-10T13:37:42.627Z"
+      },
+      "delivery": null,
+      "statusLogs": [
+        {
+          "id": "0a9415bb-9d6b-466e-a081-192e196d48c1",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "PICKED_UP",
+          "toStatus": "DELIVERED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:22:40.137Z"
+        },
+        {
+          "id": "a05e1277-b72e-4106-a0ba-f34da96bc437",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "ASSIGNED",
+          "toStatus": "PICKED_UP",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:22:12.646Z"
+        },
+        {
+          "id": "710eee2e-d83e-4a78-b4ca-f13e447ca0a6",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "READY_FOR_PICKUP",
+          "toStatus": "ASSIGNED",
+          "changedByUserId": "60e9071b-768d-481c-9183-f1ddbd641b88",
+          "note": null,
+          "createdAt": "2026-08-17T08:22:03.643Z"
+        },
+        {
+          "id": "f18265ac-c9f3-4ceb-9270-a716837e2e02",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "PREPARING",
+          "toStatus": "READY_FOR_PICKUP",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-12T16:35:41.116Z"
+        },
+        {
+          "id": "2fa50d22-5172-4d7b-8506-df51af5fe80f",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "CONFIRMED",
+          "toStatus": "PREPARING",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-12T15:57:58.620Z"
+        },
+        {
+          "id": "e9d40a4e-cca9-4bfd-9a1f-79512bcb703a",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": "PLACED",
+          "toStatus": "CONFIRMED",
+          "changedByUserId": "0f9e6659-d8e0-4314-bde9-7ab6a8519aa6",
+          "note": null,
+          "createdAt": "2026-08-11T08:50:39.254Z"
+        },
+        {
+          "id": "d8658a45-dab5-4d85-ace2-3e361a60b534",
+          "orderId": "9fabdd47-005a-45ba-b406-676518eaaf9f",
+          "fromStatus": null,
+          "toStatus": "PLACED",
+          "changedByUserId": "2712b24a-c037-44a4-9fa8-b2ca24f3b38f",
+          "note": null,
+          "createdAt": "2026-08-10T13:37:42.621Z"
+        }
+      ]
+    }
+  ],
+  "message": "Success"
+}
