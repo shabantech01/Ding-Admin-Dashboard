@@ -50,15 +50,9 @@ const PAYMENT_STATUS_STYLES = {
 const fmtDate = (iso) => {
   if (!iso) return "—";
   const d = new Date(iso);
-  return (
-    d.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }) +
-    ", " +
-    d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
-  );
+  const date = d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  const time = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+  return `${date}, ${time}`;
 };
 
 const fmtShortId = (id) => id?.slice(0, 8).toUpperCase() ?? "—";
@@ -231,7 +225,16 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                   <p className="text-[11px] font-mono font-semibold text-[#6B46C1] break-all leading-relaxed">
                     {order.id}
                   </p>
-                  <p className="text-xs text-[#8C8C8C]">{fmtDate(order.placedAt)}</p>
+                  <div className="flex flex-col gap-0.5 mt-0.5">
+                    <p className="text-xs text-[#8C8C8C]">
+                      <span className="font-semibold text-[#5C5C5C]">Placed: </span>
+                      {fmtDate(order.placedAt)}
+                    </p>
+                    <p className="text-xs text-[#8C8C8C]">
+                      <span className="font-semibold text-[#5C5C5C]">Delivered: </span>
+                      {fmtDate(order.deliveredAt)}
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-center justify-between">
                   <span

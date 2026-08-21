@@ -46,9 +46,9 @@ const PAYMENT_STYLES = {
 const fmtDate = (iso) => {
   if (!iso) return "—"
   const d = new Date(iso)
-  return d.toLocaleDateString("en-GB", {
-    day: "2-digit", month: "short", year: "numeric",
-  }) + ", " + d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+  const date = d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+  const time = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })
+  return `${date}, ${time}`
 }
 
 const fmtShortId = (id) => id.slice(0, 8).toUpperCase()
