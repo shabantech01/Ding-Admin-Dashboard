@@ -53,19 +53,6 @@ const fmtDate = (iso) => {
 
 const fmtShortId = (id) => id.slice(0, 8).toUpperCase()
 
-// Map API row → shape the existing OrderDetail panel expects
-const toDetailShape = (o) => ({
-  id:            o.id,
-  customer:      o.customerName,
-  restaurant:    o.branchName,
-  driver:        o.riderName,
-  status:        STATUS_OPTIONS.find(s => s.value === o.status)?.label ?? o.status,
-  total:         Number(o.totalAmount),
-  placed:        fmtDate(o.placedAt),
-  delivered:     fmtDate(o.deliveredAt),
-  paymentStatus: o.paymentStatus,
-  itemCount:     o.itemCount,
-})
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
@@ -127,7 +114,7 @@ const OrderManagement = ({ onMenuClick }) => {
   const [fetchError, setFetchError]             = useState(false)
 
   // ── Detail panel ──
-  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [selectedOrderId, setSelectedOrderId] = useState(null)
 
   const [fetchOrders] = useLazyGetAdminOrdersQuery()
 
@@ -369,7 +356,7 @@ const OrderManagement = ({ onMenuClick }) => {
                   : displayedOrders.map(o => (
                     <tr
                       key={o.id}
-                      onClick={() => setSelectedOrder(toDetailShape(o))}
+                      onClick={() => setSelectedOrderId(o.id)}
                       className="border-b border-[#EDEDED] last:border-0 hover:bg-[#FAFAFA] cursor-pointer transition-colors group"
                     >
                       {/* Order ID */}
@@ -450,7 +437,7 @@ const OrderManagement = ({ onMenuClick }) => {
               : displayedOrders.map(o => (
                 <div
                   key={o.id}
-                  onClick={() => setSelectedOrder(toDetailShape(o))}
+                  onClick={() => setSelectedOrderId(o.id)}
                   className="flex flex-col gap-3 p-4 border border-[#EDEDED] rounded-xl cursor-pointer hover:bg-[#FAFAFA] transition-colors"
                 >
                   {/* Top row */}
@@ -538,11 +525,11 @@ const OrderManagement = ({ onMenuClick }) => {
 
       </div>
 
-      {/* ── Order detail side panel (untouched) ── */}
-      {selectedOrder && (
+      {/* ── Order detail side panel ── */}
+      {selectedOrderId && (
         <OrderDetailModal
-          order={selectedOrder}
-          onClose={() => setSelectedOrder(null)}
+          orderId={selectedOrderId}
+          onClose={() => setSelectedOrderId(null)}
         />
       )}
     </div>

@@ -13,7 +13,11 @@ export const ordersApi = createApi({
         return `/admin/users/orders?${params}`
       },
     }),
+
+    getAdminOrderById: builder.query({
+      query: (id) => `/orders/${id}`,
+    }),
   }),
 })
 
-export const { useLazyGetAdminOrdersQuery } = ordersApi
+export const { useLazyGetAdminOrdersQuery, useGetAdminOrderByIdQuery } = ordersApi
