@@ -1,296 +1,362 @@
-import { useState, useMemo } from "react";
-import { Search } from "lucide-react";
-import Topbar from "../Dashboard/Topbar";
-import UserProfileModal from "./UserProfileModal";
+import { useState, useEffect, useCallback } from "react"
+import { Search, Loader2 } from "lucide-react"
+import Topbar from "../Dashboard/Topbar"
+import UserProfileModal from "./UserProfileModal"
+import { useGetUsersQuery, useToggleUserStatusMutation } from "../features/users/usersApi"
 
-const usersData = [
-  {
-    id: "USR-001",
-    name: "Alexander Wright",
-    email: "alex.wright@gmail.com",
-    phone: "+1 (555) 019-2834",
-    type: "Customer",
-    status: "Active",
-    joined: "9 May 2026",
-    lastActive: "23 Jun 2026, 03:12",
-    orders: 24,
-  },
-  {
-    id: "USR-002",
-    name: "Sophia Chen",
-    email: "sophia.chen@gmail.com",
-    phone: "+1 (555) 214-7729",
-    type: "Customer",
-    status: "Active",
-    joined: "24 May 2026",
-    lastActive: "23 Jun 2026, 01:24",
-    orders: 18,
-  },
-  {
-    id: "USR-003",
-    name: "Marcus Bennett",
-    email: "marcus.bennett@gmail.com",
-    phone: "+1 (555) 330-5561",
-    type: "Customer",
-    status: "Suspended",
-    joined: "24 Apr 2026",
-    lastActive: "20 Jun 2026, 03:24",
-    orders: 7,
-  },
-  {
-    id: "USR-004",
-    name: "Isabella Rodriguez",
-    email: "isabella.rodriguez@gmail.com",
-    phone: "+1 (555) 442-8890",
-    type: "Customer",
-    status: "Active",
-    joined: "11 Jun 2026",
-    lastActive: "22 Jun 2026, 04:24",
-    orders: 12,
-  },
-  {
-    id: "USR-005",
-    name: "John Doe",
-    email: "john.doe@gmail.com",
-    phone: "+1 (555) 019-3345",
-    type: "Customer",
-    status: "Active",
-    joined: "18 Jun 2026",
-    lastActive: "23 Jun 2026, 02:39",
-    orders: 5,
-  },
-  {
-    id: "USR-006",
-    name: "Emily Watson",
-    email: "emily.watson@dingmail.com",
-    phone: "+1 (555) 771-2204",
-    type: "Restaurant",
-    status: "Active",
-    joined: "25 Mar 2026",
-    lastActive: "23 Jun 2026, 03:19",
-    orders: 156,
-  },
-  {
-    id: "USR-007",
-    name: "Raj Patel",
-    email: "raj.patel@dingmail.com",
-    phone: "+1 (555) 662-9981",
-    type: "Restaurant",
-    status: "Active",
-    joined: "4 Apr 2026",
-    lastActive: "23 Jun 2026, 03:22",
-    orders: 89,
-  },
-  {
-    id: "USR-008",
-    name: "Carlos Gomez",
-    email: "carlos.gomez@dingmail.com",
-    phone: "+1 (555) 508-4471",
-    type: "Restaurant",
-    status: "Active",
-    joined: "8 Jun 2026",
-    lastActive: "22 Jun 2026, 23:24",
-    orders: 43,
-  },
-];
+// ── Constants ─────────────────────────────────────────────────────────────────
 
-const typeFilters = ["All Types", "Customers", "Restaurants", "Drivers"];
-const statusFilters = ["All Statuses", "Active", "Suspended"];
+const ROLE_FILTERS = [
+  { label: "All",      value: "ALL"      },
+  { label: "Customer", value: "CUSTOMER" },
+  { label: "Merchant", value: "MERCHANT" },
+  { label: "Rider",    value: "RIDER"    },
+]
+
+const STATUS_FILTERS = [
+  { label: "All Statuses", value: "ALL"        },
+  { label: "Active",       value: "ACTIVE"     },
+  { label: "Suspended",    value: "NOT_ACTIVE" },
+]
+
+const ROLE_LABEL = {
+  CUSTOMER:   "Customer",
+  MERCHANT:   "Merchant",
+  RIDER:      "Rider",
+  SUPERADMIN: "Admin",
+}
+
+const PAGE_SIZE = 20
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+const formatDate = (iso) => {
+  if (!iso) return "—"
+  return new Date(iso).toLocaleDateString("en-GB", {
+    day: "numeric", month: "short", year: "numeric",
+  })
+}
+
+// ── Sub-components ────────────────────────────────────────────────────────────
 
 const StatusBadge = ({ status }) => {
-  const isActive = status === "Active";
+  const isActive = status === "ACTIVE"
   return (
-    <span
-      className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${
-        isActive ? "bg-[#FFF1E6] text-[#D97706]" : "bg-[#FDE8E8] text-[#DC2626]"
-      }`}
-    >
-      {status}
+    <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${
+      isActive ? "bg-[#FFF1E6] text-[#D97706]" : "bg-[#FDE8E8] text-[#DC2626]"
+    }`}>
+      {isActive ? "Active" : "Suspended"}
     </span>
-  );
-};
+  )
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 
 const UserManagement = ({ onMenuClick }) => {
-  const [search, setSearch] = useState("");
-  const [activeType, setActiveType] = useState("All Types");
-  const [activeStatus, setActiveStatus] = useState("All Statuses");
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [roleFilter, setRoleFilter]   = useState("ALL")
+  const [statusFilter, setStatusFilter] = useState("ALL")
+  const [search, setSearch]           = useState("")
+  const [debouncedSearch, setDebouncedSearch] = useState("")
+  const [cursor, setCursor]           = useState(undefined)
+  const [allUsers, setAllUsers]       = useState([])
+  const [selectedUser, setSelectedUser] = useState(null)
 
-  const filteredUsers = useMemo(() => {
-    return usersData.filter((user) => {
-      const matchesSearch =
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.id.toLowerCase().includes(search.toLowerCase());
+  // ── Debounce search input (400ms) ──────────────────────────────────────────
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search.trim()), 400)
+    return () => clearTimeout(t)
+  }, [search])
 
-      const matchesType =
-        activeType === "All Types" ||
-        user.type.toLowerCase() === activeType.toLowerCase().slice(0, -1); // "Customers" -> "customer"
+  // ── Reset pagination when filters or search change ─────────────────────────
+  useEffect(() => {
+    setCursor(undefined)
+    setAllUsers([])
+  }, [roleFilter, statusFilter, debouncedSearch])
 
-      const matchesStatus =
-        activeStatus === "All Statuses" || user.status === activeStatus;
+  // ── Fetch ──────────────────────────────────────────────────────────────────
+  const { data, isFetching, isError } = useGetUsersQuery({
+    role:   roleFilter,
+    status: statusFilter,
+    search: debouncedSearch,
+    cursor,
+    take:   PAGE_SIZE,
+  })
 
-      return matchesSearch && matchesType && matchesStatus;
-    });
-  }, [search, activeType, activeStatus]);
+  // ── Accumulate pages ───────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!data?.data?.users) return
+    if (cursor === undefined) {
+      setAllUsers(data.data.users)
+    } else {
+      setAllUsers((prev) => [...prev, ...data.data.users])
+    }
+  // cursor intentionally excluded — we only want to run on new data arrivals
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data])
 
+  const hasMore    = data?.data?.hasMore ?? false
+  const nextCursor = data?.data?.nextCursor
+
+  const loadMore = useCallback(() => {
+    if (nextCursor) setCursor(nextCursor)
+  }, [nextCursor])
+
+  // ── Toggle status ──────────────────────────────────────────────────────────
+  const [toggleStatus, { isLoading: isToggling }] = useToggleUserStatusMutation()
+
+  const handleToggleStatus = useCallback(async (userId) => {
+    await toggleStatus(userId)
+    // Optimistically update the selected user in the modal
+    setSelectedUser((prev) =>
+      prev?.id === userId
+        ? { ...prev, status: prev.status === "ACTIVE" ? "NOT_ACTIVE" : "ACTIVE" }
+        : prev
+    )
+  }, [toggleStatus])
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Topbar title="System Oversight" onMenuClick={onMenuClick} />
 
       <div className="flex flex-col gap-6 px-4 sm:px-6 py-6 sm:py-8">
+
         {/* Heading */}
         <div className="flex flex-col gap-1">
-          <h4 className="text-2xl sm:text-normal font-bold text-[#000000]!">
-            User Management
-          </h4>
+          <h4 className="text-2xl font-bold text-[#000000]">User Management</h4>
           <p className="text-xs sm:text-sm text-[#8C8C8C]">
-            Unified directory of customers, restaurant owners, and drivers
+            Unified directory of customers, merchants, and riders
           </p>
         </div>
 
         {/* Search + filters */}
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between p-4 sm:p-5 border border-[#EDEDED] rounded-xl">
+
+          {/* Search */}
           <div className="relative w-full sm:max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8C8C8C]" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search name, email, or ID..."
+              placeholder="Search by name or email..."
               className="w-full h-10 pl-9 pr-3 bg-white border border-[#D9D9D9] rounded-md text-sm focus:outline-none focus:border-[#765AB8]"
             />
           </div>
 
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+            {/* Role pill tabs */}
             <div className="flex items-center gap-1 bg-[#F9F9F9] p-1 rounded-md overflow-x-auto">
-              {typeFilters.map((type) => (
+              {ROLE_FILTERS.map(({ label, value }) => (
                 <button
-                  key={type}
-                  onClick={() => setActiveType(type)}
+                  key={value}
+                  onClick={() => setRoleFilter(value)}
                   className={`px-3 py-1.5 rounded text-xs sm:text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
-                    activeType === type
+                    roleFilter === value
                       ? "bg-white text-[#000000] shadow-sm"
                       : "text-[#8C8C8C] hover:text-[#000000]"
                   }`}
                 >
-                  {type}
+                  {label}
                 </button>
               ))}
             </div>
 
+            {/* Status dropdown */}
             <select
-              value={activeStatus}
-              onChange={(e) => setActiveStatus(e.target.value)}
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
               className="h-9 px-3 bg-white border border-[#D9D9D9] rounded-md text-xs sm:text-sm font-medium text-[#000000] cursor-pointer focus:outline-none"
             >
-              {statusFilters.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
+              {STATUS_FILTERS.map(({ label, value }) => (
+                <option key={value} value={value}>{label}</option>
               ))}
             </select>
           </div>
         </div>
 
-        {/* Desktop table*/}
-        <div className="hidden md:block border border-[#EDEDED] rounded-lg overflow-hidden">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="bg-[#F9F9F9] border-b border-[#EDEDED]">
-                <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">
-                  User
-                </th>
-                <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">
-                  Type
-                </th>
-                <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">
-                  Status
-                </th>
-                <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">
-                  Joined Date
-                </th>
-                <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">
-                  Last Active
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((user) => (
-                <tr
-                  key={user.id}
-                  onClick={() => setSelectedUser(user)}
-                  className="border-b cursor-pointer border-[#EDEDED] last:border-0 hover:bg-[#F9F9F9]"
-                >
-                  <td className="px-4 py-3">
-                    <p className="text-sm font-semibold text-[#000000]">
-                      {user.name}
-                    </p>
-                    <p className="text-xs text-[#8C8C8C]">{user.id}</p>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-[#000000]">
-                    {user.type}
-                  </td>
-                  <td className="px-4 py-3">
-                    <StatusBadge status={user.status} />
-                  </td>
-                  <td className="px-4 py-3 text-sm text-[#8C8C8C]">
-                    {user.joined}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-[#8C8C8C]">
-                    {user.lastActive}
-                  </td>
+        {/* Error state */}
+        {isError && (
+          <p className="text-center text-sm text-[#DC2626] py-6">
+            Failed to load users. Please try again.
+          </p>
+        )}
+
+        {/* Desktop table */}
+        {!isError && (
+          <div className="hidden md:block border border-[#EDEDED] rounded-lg overflow-hidden">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-[#F9F9F9] border-b border-[#EDEDED]">
+                  <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">User</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">Role</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">Status</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">Joined</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-[#8C8C8C] uppercase">Orders</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {allUsers.map((user) => (
+                  <tr
+                    key={user.id}
+                    onClick={() => setSelectedUser(user)}
+                    className="border-b border-[#EDEDED] last:border-0 hover:bg-[#F9F9F9] cursor-pointer"
+                  >
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        {user.profilePhotoUrl ? (
+                          <img
+                            src={user.profilePhotoUrl}
+                            alt={user.name}
+                            className="w-8 h-8 rounded-full object-cover shrink-0"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-[#F3F0FA] flex items-center justify-center shrink-0">
+                            <span className="text-xs font-semibold text-[#765AB8]">
+                              {user.name?.[0]?.toUpperCase() ?? "?"}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-sm font-semibold text-[#000000]">{user.name}</p>
+                          <p className="text-xs text-[#8C8C8C]">{user.email}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-[#000000]">
+                      {ROLE_LABEL[user.role] ?? user.role}
+                    </td>
+                    <td className="px-4 py-3">
+                      <StatusBadge status={user.status} />
+                    </td>
+                    <td className="px-4 py-3 text-sm text-[#8C8C8C]">
+                      {formatDate(user.createdAt)}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-[#8C8C8C]">
+                      {user.role === "RIDER"
+                        ? user._count?.deliveryOrders ?? 0
+                        : user._count?.orders ?? 0}
+                    </td>
+                  </tr>
+                ))}
 
-        {/* Mobile cards*/}
-        <div className="flex flex-col gap-3 md:hidden">
-          {filteredUsers.map((user) => (
-            <div
-              key={user.id}
-              onClick={() => setSelectedUser(user)}
-              className="flex flex-col gap-2 p-4 border border-[#EDEDED] rounded-lg"
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-[#000000]">
-                    {user.name}
-                  </p>
-                  <p className="text-xs text-[#8C8C8C]">{user.id}</p>
+                {/* First-load skeleton rows */}
+                {isFetching && allUsers.length === 0 &&
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <tr key={`skel-${i}`} className="border-b border-[#EDEDED]">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#F0F0F0] animate-pulse" />
+                          <div className="flex flex-col gap-1.5">
+                            <div className="h-3 w-28 bg-[#F0F0F0] rounded animate-pulse" />
+                            <div className="h-2.5 w-36 bg-[#F0F0F0] rounded animate-pulse" />
+                          </div>
+                        </div>
+                      </td>
+                      {[1,2,3,4].map((c) => (
+                        <td key={c} className="px-4 py-3">
+                          <div className="h-3 w-16 bg-[#F0F0F0] rounded animate-pulse" />
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Mobile cards */}
+        {!isError && (
+          <div className="flex flex-col gap-3 md:hidden">
+            {allUsers.map((user) => (
+              <div
+                key={user.id}
+                onClick={() => setSelectedUser(user)}
+                className="flex flex-col gap-2 p-4 border border-[#EDEDED] rounded-lg cursor-pointer"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-3 min-w-0">
+                    {user.profilePhotoUrl ? (
+                      <img src={user.profilePhotoUrl} alt={user.name} className="w-9 h-9 rounded-full object-cover shrink-0" />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-[#F3F0FA] flex items-center justify-center shrink-0">
+                        <span className="text-xs font-semibold text-[#765AB8]">{user.name?.[0]?.toUpperCase() ?? "?"}</span>
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-[#000000] truncate">{user.name}</p>
+                      <p className="text-xs text-[#8C8C8C] truncate">{user.email}</p>
+                    </div>
+                  </div>
+                  <StatusBadge status={user.status} />
                 </div>
-                <StatusBadge status={user.status} />
+                <div className="flex items-center justify-between text-xs text-[#8C8C8C] pt-2 border-t border-[#EDEDED]">
+                  <span>{ROLE_LABEL[user.role] ?? user.role}</span>
+                  <span>Joined {formatDate(user.createdAt)}</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-xs text-[#8C8C8C] pt-2 border-t border-[#EDEDED]">
-                <span>{user.type}</span>
-                <span>Joined {user.joined}</span>
-              </div>
-              <p className="text-xs text-[#8C8C8C]">
-                Last active: {user.lastActive}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
 
-        {filteredUsers.length === 0 && (
+            {/* Mobile skeleton */}
+            {isFetching && allUsers.length === 0 &&
+              Array.from({ length: 4 }).map((_, i) => (
+                <div key={`mskel-${i}`} className="p-4 border border-[#EDEDED] rounded-lg flex flex-col gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-[#F0F0F0] animate-pulse shrink-0" />
+                    <div className="flex flex-col gap-1.5 flex-1">
+                      <div className="h-3 w-32 bg-[#F0F0F0] rounded animate-pulse" />
+                      <div className="h-2.5 w-40 bg-[#F0F0F0] rounded animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        )}
+
+        {/* Empty state */}
+        {!isFetching && !isError && allUsers.length === 0 && (
           <p className="text-center text-sm text-[#8C8C8C] py-10">
             No users found matching your filters.
           </p>
         )}
+
+        {/* Load more */}
+        {hasMore && !isError && (
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={loadMore}
+              disabled={isFetching}
+              className="flex items-center gap-2 px-5 py-2.5 border border-[#D9D9D9] rounded-lg text-sm font-medium text-[#000000] hover:bg-[#F9F9F9] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            >
+              {isFetching ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> Loading…</>
+              ) : (
+                "Load More"
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* Inline loading spinner for subsequent pages */}
+        {isFetching && allUsers.length > 0 && (
+          <div className="flex justify-center py-4">
+            <Loader2 className="w-5 h-5 animate-spin text-[#765AB8]" />
+          </div>
+        )}
       </div>
+
       {selectedUser && (
         <UserProfileModal
           user={selectedUser}
           onClose={() => setSelectedUser(null)}
-          onSuspend={(id) => {
-            console.log("Suspend user:", id);
-            setSelectedUser(null);
-          }}
+          onToggleStatus={handleToggleStatus}
+          isToggling={isToggling}
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UserManagement;
+export default UserManagement
