@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
-import { Search, Loader2 } from "lucide-react"
+import { Search, Loader2, RefreshCw } from "lucide-react"
 import Topbar from "../Dashboard/Topbar"
 import UserProfileModal from "./UserProfileModal"
 import { useGetUsersQuery, useToggleUserStatusMutation } from "../features/users/usersApi"
@@ -74,7 +74,7 @@ const UserManagement = ({ onMenuClick }) => {
   }, [roleFilter, statusFilter, debouncedSearch])
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
-  const { data, isFetching, isError } = useGetUsersQuery({
+  const { data, isFetching, isError, refetch } = useGetUsersQuery({
     role:   roleFilter,
     status: statusFilter,
     search: debouncedSearch,
@@ -100,6 +100,12 @@ const UserManagement = ({ onMenuClick }) => {
   const loadMore = useCallback(() => {
     if (nextCursor) setCursor(nextCursor)
   }, [nextCursor])
+
+  const handleRefresh = () => {
+    setAllUsers([])
+    setCursor(undefined)
+    refetch()
+  }
 
   // ── Toggle status ──────────────────────────────────────────────────────────
   const [toggleStatus, { isLoading: isToggling }] = useToggleUserStatusMutation()
@@ -172,6 +178,16 @@ const UserManagement = ({ onMenuClick }) => {
                 <option key={value} value={value}>{label}</option>
               ))}
             </select>
+
+            {/* Refresh */}
+            <button
+              onClick={handleRefresh}
+              disabled={isFetching}
+              title="Refresh"
+              className="h-9 w-9 flex items-center justify-center border border-[#D9D9D9] rounded-lg text-[#8C8C8C] hover:text-[#765AB8] hover:border-[#765AB8] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shrink-0"
+            >
+              <RefreshCw className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
+            </button>
           </div>
         </div>
 

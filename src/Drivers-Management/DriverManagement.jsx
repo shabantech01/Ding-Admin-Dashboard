@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
-import { Search, Bike, Truck, Plus, CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { Search, Bike, Truck, Plus, CheckCircle2, XCircle, Loader2, RefreshCw } from "lucide-react";
 import Topbar from "../Dashboard/Topbar";
 import AddDriverModal from "./AddDriver";
 import RiderDetailModal from "./RiderDetailModal";
@@ -111,7 +111,7 @@ const DriverManagement = ({ onMenuClick }) => {
   const [toast, setToast]             = useState(null);
 
   const { isOnline } = useNetworkStatus()
-  const { data: response, isLoading, isError } = useGetRidersQuery(activeTab);
+  const { data: response, isLoading, isFetching, isError, refetch } = useGetRidersQuery(activeTab);
   const riders = response?.data ?? [];
 
   const showToast = (type, message) => {
@@ -176,16 +176,26 @@ const DriverManagement = ({ onMenuClick }) => {
               ))}
             </div>
 
-            {/* Search */}
-            <div className="relative w-full sm:w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8C8C8C]" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by name, email or ID…"
-                className="w-full h-10 pl-9 pr-3 bg-white border border-[#D9D9D9] rounded-md text-sm focus:outline-none focus:border-[#765AB8]"
-              />
+            {/* Search + Refresh */}
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="relative flex-1 sm:w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8C8C8C]" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by name, email or ID…"
+                  className="w-full h-10 pl-9 pr-3 bg-white border border-[#D9D9D9] rounded-md text-sm focus:outline-none focus:border-[#765AB8]"
+                />
+              </div>
+              <button
+                onClick={refetch}
+                disabled={isFetching}
+                title="Refresh"
+                className="h-10 w-10 flex items-center justify-center border border-[#D9D9D9] rounded-lg text-[#8C8C8C] hover:text-[#765AB8] hover:border-[#765AB8] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shrink-0"
+              >
+                <RefreshCw className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
+              </button>
             </div>
           </div>
 

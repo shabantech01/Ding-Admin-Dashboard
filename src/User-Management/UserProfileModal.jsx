@@ -1,42 +1,55 @@
-import { useState, useEffect } from "react"
-import { X, User, Mail, Phone, Calendar, ShoppingBag, UserX, UserCheck, Store, Bike } from "lucide-react"
+import { useState, useEffect } from "react";
+import {
+  X,
+  User,
+  Mail,
+  Phone,
+  Calendar,
+  ShoppingBag,
+  UserX,
+  UserCheck,
+  Store,
+  Bike,
+} from "lucide-react";
 
 const ROLE_LABEL = {
-  CUSTOMER:   "Customer",
-  MERCHANT:   "Merchant",
-  RIDER:      "Rider",
+  CUSTOMER: "Customer",
+  MERCHANT: "Merchant",
+  RIDER: "Rider",
   SUPERADMIN: "Admin",
-}
+};
 
 const formatDate = (iso) => {
-  if (!iso) return "—"
+  if (!iso) return "—";
   return new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric", month: "short", year: "numeric",
-  })
-}
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
 
 const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setIsVisible(true), 10)
-    return () => clearTimeout(t)
-  }, [])
+    const t = setTimeout(() => setIsVisible(true), 10);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleClose = () => {
-    setIsVisible(false)
-    setTimeout(onClose, 300)
-  }
+    setIsVisible(false);
+    setTimeout(onClose, 300);
+  };
 
-  if (!user) return null
+  if (!user) return null;
 
-  const isActive    = user.status === "ACTIVE"
-  const isSuperAdmin = user.role === "SUPERADMIN"
+  const isActive = user.status === "ACTIVE";
+  const isSuperAdmin = user.role === "SUPERADMIN";
 
   const ordersCount =
     user.role === "RIDER"
-      ? user._count?.deliveryOrders ?? 0
-      : user._count?.orders ?? 0
+      ? (user._count?.deliveryOrders ?? 0)
+      : (user._count?.orders ?? 0);
 
   return (
     <div
@@ -73,7 +86,9 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
             </div>
           )}
           <div>
-            <h2 className="text-lg sm:text-xl font-bold text-[#000000]">{user.name}</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-[#000000]!">
+              {user.name}
+            </h2>
             <p className="text-xs sm:text-sm text-[#8C8C8C]">
               {ROLE_LABEL[user.role] ?? user.role}
             </p>
@@ -88,12 +103,13 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
             Profile Information
           </p>
           <div className="flex flex-col gap-4 p-4 border border-[#EDEDED] rounded-xl bg-[#FAFAFA]">
-
             <div className="flex items-start gap-3">
               <Mail className="w-4 h-4 text-[#8C8C8C] mt-0.5 shrink-0" />
               <div>
                 <p className="text-xs text-[#8C8C8C]">Email Address</p>
-                <p className="text-sm font-semibold text-[#000000] break-all">{user.email || "—"}</p>
+                <p className="text-sm font-semibold text-[#000000] break-all">
+                  {user.email || "—"}
+                </p>
               </div>
             </div>
 
@@ -101,7 +117,9 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
               <Phone className="w-4 h-4 text-[#8C8C8C] mt-0.5 shrink-0" />
               <div>
                 <p className="text-xs text-[#8C8C8C]">Phone</p>
-                <p className="text-sm font-semibold text-[#000000]">{user.phone || "—"}</p>
+                <p className="text-sm font-semibold text-[#000000]">
+                  {user.phone || "—"}
+                </p>
               </div>
             </div>
 
@@ -109,7 +127,9 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
               <Calendar className="w-4 h-4 text-[#8C8C8C] mt-0.5 shrink-0" />
               <div>
                 <p className="text-xs text-[#8C8C8C]">Joined</p>
-                <p className="text-sm font-semibold text-[#000000]">{formatDate(user.createdAt)}</p>
+                <p className="text-sm font-semibold text-[#000000]">
+                  {formatDate(user.createdAt)}
+                </p>
               </div>
             </div>
 
@@ -119,7 +139,9 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
                 <p className="text-xs text-[#8C8C8C]">
                   {user.role === "RIDER" ? "Deliveries" : "Orders"}
                 </p>
-                <p className="text-sm font-semibold text-[#000000]">{ordersCount}</p>
+                <p className="text-sm font-semibold text-[#000000]">
+                  {ordersCount}
+                </p>
               </div>
             </div>
 
@@ -129,7 +151,9 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
                 <Store className="w-4 h-4 text-[#8C8C8C] mt-0.5 shrink-0" />
                 <div>
                   <p className="text-xs text-[#8C8C8C]">Business</p>
-                  <p className="text-sm font-semibold text-[#000000]">{user.merchant.businessName}</p>
+                  <p className="text-sm font-semibold text-[#000000]">
+                    {user.merchant.businessName}
+                  </p>
                   <p className="text-xs text-[#8C8C8C] mt-0.5">
                     Merchant status: {user.merchant.status}
                   </p>
@@ -144,11 +168,13 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
                 <div>
                   <p className="text-xs text-[#8C8C8C]">Rider Status</p>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className={`w-2 h-2 rounded-full ${
-                      user.riderProfile.onlineStatus === "ONLINE"
-                        ? "bg-green-500"
-                        : "bg-gray-400"
-                    }`} />
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        user.riderProfile.onlineStatus === "ONLINE"
+                          ? "bg-green-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
                     <p className="text-sm font-semibold text-[#000000]">
                       {user.riderProfile.onlineStatus}
                     </p>
@@ -165,12 +191,16 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
             Account Status
           </p>
           <div className="flex items-center justify-between p-4 border border-[#EDEDED] rounded-xl">
-            <span className="text-sm font-medium text-[#000000]">Current Status</span>
-            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              isActive
-                ? "bg-[#FFF1E6] text-[#D97706]"
-                : "bg-[#FDE8E8] text-[#DC2626]"
-            }`}>
+            <span className="text-sm font-medium text-[#000000]">
+              Current Status
+            </span>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                isActive
+                  ? "bg-[#FFF1E6] text-[#D97706]"
+                  : "bg-[#FDE8E8] text-[#DC2626]"
+              }`}
+            >
               {isActive ? "Active" : "Suspended"}
             </span>
           </div>
@@ -190,9 +220,13 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
               }`}
             >
               {isActive ? (
-                <><UserX className="w-4 h-4 shrink-0" /> Suspend Account</>
+                <>
+                  <UserX className="w-4 h-4 shrink-0" /> Suspend Account
+                </>
               ) : (
-                <><UserCheck className="w-4 h-4 shrink-0" /> Activate Account</>
+                <>
+                  <UserCheck className="w-4 h-4 shrink-0" /> Activate Account
+                </>
               )}
             </button>
           )}
@@ -206,7 +240,7 @@ const UserProfileModal = ({ user, onClose, onToggleStatus, isToggling }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserProfileModal
+export default UserProfileModal;

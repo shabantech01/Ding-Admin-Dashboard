@@ -161,7 +161,7 @@ const RestaurantManagement = ({ onMenuClick }) => {
   const [toast, setToast] = useState(null)
 
   const { isOnline } = useNetworkStatus()
-  const { data, isLoading, isError, refetch } = useGetMerchantsQuery("ALL");
+  const { data, isLoading, isFetching, isError, refetch } = useGetMerchantsQuery("ALL");
   const [approveMerchant, { isLoading: isApproving }] =
     useApproveMerchantMutation();
   const [rejectMerchant, { isLoading: isRejecting }] = useRejectMerchantMutation()
@@ -289,10 +289,11 @@ const RestaurantManagement = ({ onMenuClick }) => {
             </div>
             <button
               onClick={refetch}
+              disabled={isFetching}
               title="Refresh"
-              className="h-10 w-10 flex items-center justify-center border border-[#D9D9D9] rounded-lg text-[#8C8C8C] hover:text-[#765AB8] hover:border-[#765AB8] transition-colors cursor-pointer shrink-0"
+              className="h-10 w-10 flex items-center justify-center border border-[#D9D9D9] rounded-lg text-[#8C8C8C] hover:text-[#765AB8] hover:border-[#765AB8] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shrink-0"
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`} />
             </button>
           </div>
         </div>
