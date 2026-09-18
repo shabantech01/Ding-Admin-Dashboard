@@ -6,6 +6,7 @@ import { merchantsApi } from "../features/merchants/merchantsApi"
 import { ridersApi } from "../features/riders/ridersApi"
 import { ordersApi } from "../features/orders/ordersApi"
 import { usersApi } from "../features/users/usersApi"
+import { dashboardApi } from "../features/dashboard/dashboardApi"
 import { ADMIN_STORAGE_KEYS } from "../constants/storageKeys"
 
 const loadAuthFromStorage = () => {
@@ -38,12 +39,13 @@ export const store = configureStore({
     [ridersApi.reducerPath]: ridersApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
   },
   preloadedState: {
     auth: loadAuthFromStorage(),
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, merchantsApi.middleware, ridersApi.middleware, ordersApi.middleware, usersApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, merchantsApi.middleware, ridersApi.middleware, ordersApi.middleware, usersApi.middleware, dashboardApi.middleware),
 })
 
 // Enables refetchOnFocus / refetchOnReconnect for all RTK Query subscriptions.

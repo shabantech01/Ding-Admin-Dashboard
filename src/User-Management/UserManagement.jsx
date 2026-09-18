@@ -29,7 +29,7 @@ const ROLE_LABEL = {
   SUPERADMIN: "Admin",
 };
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 10;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -82,7 +82,6 @@ const UserManagement = ({ onMenuClick }) => {
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const { data, isFetching, isError, refetch } = useGetUsersQuery({
-    // role:   roleFilter,
     role: "CUSTOMER",
     status: statusFilter,
     search: debouncedSearch,
@@ -164,8 +163,8 @@ const UserManagement = ({ onMenuClick }) => {
           </div>
 
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
-            {/* Role pill tabs */}
-            {/* <div className="flex items-center gap-1 bg-[#F9F9F9] p-1 rounded-md overflow-x-auto">
+            {/* Role pill tabs — hidden until role filter is needed
+            <div className="flex items-center gap-1 bg-[#F9F9F9] p-1 rounded-md overflow-x-auto">
               {ROLE_FILTERS.map(({ label, value }) => (
                 <button
                   key={value}
@@ -179,7 +178,9 @@ const UserManagement = ({ onMenuClick }) => {
                   {label}
                 </button>
               ))}
-            </div> */}
+            </div>
+            Roles: All | Customer | Merchant | Rider
+            */}
 
             {/* Status dropdown */}
             <select
