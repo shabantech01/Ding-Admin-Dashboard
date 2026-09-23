@@ -171,14 +171,14 @@ const DocumentUploadRow = ({
             className="hidden"
           />
 
-          <button
+          {/* <button
             type="button"
             onClick={() => cameraRef.current?.click()}
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-full border border-[#D9D9D9] bg-white text-xs font-semibold text-[#000000] hover:bg-[#F9F9F9] transition-colors cursor-pointer"
           >
             <Camera className="w-4 h-4" />
             Camera
-          </button>
+          </button> */}
           <button
             type="button"
             onClick={() => galleryRef.current?.click()}

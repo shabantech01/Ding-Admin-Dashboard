@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNetworkStatus } from "../hooks/useNetworkStatus";
+import { useGetMerchantByIdQuery } from "../features/merchants/merchantsApi";
 import {
   X,
   UtensilsCrossed,
@@ -55,6 +56,12 @@ const RestaurantApplicationModal = ({
   const { isOnline } = useNetworkStatus()
   const [isVisible, setIsVisible] = useState(false);
 
+  // Hook must be called unconditionally — skip when no id is available
+  const { data: detailRes, isFetching: isDetailFetching } = useGetMerchantByIdQuery(
+    application?.id,
+    { refetchOnMountOrArgChange: true, skip: !application?.id }
+  );
+
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
     return () => clearTimeout(timer);
@@ -67,8 +74,10 @@ const RestaurantApplicationModal = ({
 
   if (!application) return null;
 
-  const hoursLines = formatHours(application.openingClosingHours);
-  const hasCoords = application.lat != null && application.lng != null;
+  const detail = detailRes?.data ?? application;
+
+  const hoursLines = formatHours(detail.openingClosingHours ?? application.openingClosingHours);
+  const hasCoords = (detail.lat ?? application.lat) != null && (detail.lng ?? application.lng) != null;
 
   return (
     <div
@@ -192,17 +201,20 @@ const RestaurantApplicationModal = ({
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 text-xs text-[#8C8C8C]">
-                  <Clock className="w-3.5 h-3.5" /> Initial service state
+                  <Clock className="w-3.5 h-3.5" /> Kitchen State
                 </span>
-                <span
-                  className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                    application.kitchenServiceState === "OPEN"
-                      ? "bg-green-50 text-green-700"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
-                >
-                  {application.kitchenServiceState || "—"}
-                </span>
+                {isDetailFetching ? (
+                  <div className="h-6 w-20 bg-gray-200 rounded-full animate-pulse" />
+                ) : (() => {
+                  const state = detailRes?.data?.branches?.[0]?.status ?? detailRes?.data?.kitchenServiceState ?? application.kitchenServiceState;
+                  const isOpen = state === "OPEN" || state === "LIVE";
+                  return (
+                    <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full ${isOpen ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${isOpen ? "bg-green-500 animate-pulse" : "bg-red-500"}`} />
+                      {state ?? "—"}
+                    </span>
+                  );
+                })()}
               </div>
 
               {/* Opening hours */}

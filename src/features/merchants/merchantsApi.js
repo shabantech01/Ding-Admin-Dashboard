@@ -10,6 +10,10 @@ export const merchantsApi = createApi({
       query: (status = "ALL") => `/admin/merchants?status=${status}`,
       providesTags: ["Merchants"],
     }),
+    getMerchantById: builder.query({
+      query: (id) => `/admin/merchants/${id}`,
+      providesTags: (result, error, id) => [{ type: "Merchants", id }],
+    }),
     approveMerchant: builder.mutation({
       query: (merchantId) => ({
         url: `/admin/merchants/${merchantId}/verify`,
@@ -38,6 +42,7 @@ export const merchantsApi = createApi({
 
 export const {
   useGetMerchantsQuery,
+  useGetMerchantByIdQuery,
   useApproveMerchantMutation,
   useRejectMerchantMutation,
   useSuspendMerchantMutation,
