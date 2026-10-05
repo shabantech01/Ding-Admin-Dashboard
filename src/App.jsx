@@ -4,6 +4,7 @@ import Login from './Login/Login'
 import Orders from './Orders-Oversight/Orders'
 import Restaurants from './Resturant-Management/Restaurant'
 import Users from './User-Management/Users'
+import Support from './Support/Support'
 import ProtectedRoute from './ProtectedRoutes'
 import OfflineBanner from './components/OfflineBanner'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -52,6 +53,14 @@ function App() {
       element: (
         <ProtectedRoute>
           <Orders />
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: "/support",
+      element: (
+        <ProtectedRoute>
+          <Support />
         </ProtectedRoute>
       )
     }
