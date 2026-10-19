@@ -275,6 +275,15 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                           No phone on file
                         </p>
                       )}
+                      {order.customer?.email ? (
+                        <p className="text-xs text-[#8C8C8C]">
+                          {order.customer.email}
+                        </p>
+                      ) : (
+                        <p className="text-xs italic text-[#BFBFBF]">
+                          No email on file
+                        </p>
+                      )}
                     </div>
                   </div>
 
