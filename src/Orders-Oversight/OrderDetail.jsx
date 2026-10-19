@@ -246,7 +246,7 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                     {STATUS_LABEL[order.status] ?? order.status}
                   </span>
                   <span className="text-lg font-bold text-[#000000]">
-                    R {Number(order.totalAmount).toLocaleString("en-ZA")}
+                    R {Number(order.totalAmount).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -369,10 +369,10 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                           ×{item.quantity}
                         </p>
                         <p className="text-[11px] text-[#8C8C8C]">
-                          R{Number(item.unitPrice).toFixed(0)} ea
+                          R {Number(item.unitPrice).toFixed(2)} ea
                         </p>
                         <p className="text-sm font-bold text-[#000000]">
-                          R{Number(item.totalPrice).toFixed(0)}
+                          R {Number(item.totalPrice).toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -383,7 +383,7 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                       Total
                     </span>
                     <span className="text-base font-bold text-[#000000]">
-                      R {Number(order.totalAmount).toLocaleString("en-ZA")}
+                      R {Number(order.totalAmount).toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -420,7 +420,7 @@ const OrderDetailModal = ({ orderId, onClose }) => {
                         </p>
                         <p className="text-sm font-bold text-[#000000]">
                           {order.payment.currency}{" "}
-                          {Number(order.payment.amount).toLocaleString("en-ZA")}
+                          {Number(order.payment.amount).toFixed(2)}
                         </p>
                       </div>
                     </div>

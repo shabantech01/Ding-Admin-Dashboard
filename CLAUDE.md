@@ -105,6 +105,21 @@ React 19 + Vite + Tailwind v4 + Redux Toolkit (RTK Query). JavaScript (not TypeS
 - **Create** `POST /admin/riders`: `{ name, email, phone, nationalIdUrl, driversLicenseUrl, vehicleRegistrationUrl, profilePhotoUrl }`
 - **Update** `PATCH /admin/riders/:id`: same fields — pass existing key for unchanged docs, new S3 key for replaced docs
 
+## Delivery Fee Management (Delivery-Fee-Management/)
+
+### Files
+| File | Role |
+|---|---|
+| `DeliveryFees.jsx` | Layout wrapper with `Sidebar` and `DeliveryFeeManagement` |
+| `DeliveryFeeManagement.jsx` | Fetches `/delivery-fee`; displays current fee amount, status (active/paused), timestamps, and quick toggle; toast alerts |
+| `EditDeliveryFeeModal.jsx` | Slide-over drawer; form inputs for name, amount, active status switch, and description; client-side validation; updates via `POST /delivery-fee` |
+
+### API endpoints — `src/features/deliveryFees/deliveryFeesApi.js`
+| Method | Path | Hook | Notes |
+|---|---|---|---|
+| GET | `/delivery-fee` | `useGetDeliveryFeeQuery()` | `providesTags: ["DeliveryFee"]` |
+| POST | `/delivery-fee` | `useUpdateDeliveryFeeMutation()` | Upserts active fee; `invalidatesTags: ["DeliveryFee"]` |
+
 ## Dev helper
 - Avatar initials button in `Topbar.jsx` — click to `console.log` the live `accessToken` (styled purple). For API testing during development only.
 

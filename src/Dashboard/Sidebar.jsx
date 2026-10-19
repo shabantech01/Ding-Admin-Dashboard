@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
-import { X, LogOut, HeadphonesIcon } from "lucide-react"
+import { X, LogOut, HeadphonesIcon, BadgePercent } from "lucide-react"
 import { useDispatch } from "react-redux"
 import home from "../assets/home.svg"
 import users from "../assets/users.svg"
@@ -94,6 +94,25 @@ const Sidebar = ({ isOpen, onClose }) => {
               )}
             </NavLink>
           ))}
+          {/* Delivery Fee */}
+          <NavLink
+            to="/delivery-fee"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm sm:text-base transition-colors ${
+                isActive
+                  ? "bg-[#765AB8] text-white font-semibold"
+                  : "text-[#5C5C5C] hover:bg-[#F9F9F9]"
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                <BadgePercent className={`w-5 h-5 ${isActive ? "text-white" : "text-[#5C5C5C]"}`} />
+                <span>Delivery Fee</span>
+              </>
+            )}
+          </NavLink>
           {/* Support — uses Lucide icon (no SVG asset) */}
           <NavLink
             to="/support"
