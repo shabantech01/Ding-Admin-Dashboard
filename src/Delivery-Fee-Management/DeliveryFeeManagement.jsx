@@ -215,19 +215,9 @@ const DeliveryFeeManagement = ({ onMenuClick }) => {
                       <h4 className="text-xl font-bold text-[#000000]!">
                         {fee.name || "Standard Delivery Fee"}
                       </h4>
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                          fee.isActive
-                            ? "bg-green-50 text-green-700 border border-green-200"
-                            : "bg-gray-100 text-gray-600 border border-gray-200"
-                        }`}
-                      >
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            fee.isActive ? "bg-green-500" : "bg-gray-400"
-                          }`}
-                        />
-                        {fee.isActive ? "Active (Imposed)" : "Paused"}
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        Active (Imposed)
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm text-[#8C8C8C]">
@@ -313,7 +303,7 @@ const DeliveryFeeManagement = ({ onMenuClick }) => {
                     Customer Checkout Application
                   </p>
                   <p className="text-xs text-[#8C8C8C] leading-relaxed">
-                    When active, this fee is automatically calculated into customer order totals under{" "}
+                    This fee is automatically calculated into every customer order total under{" "}
                     <span className="font-mono text-[#765AB8]">totals.deliveryFee</span>.
                   </p>
                 </div>

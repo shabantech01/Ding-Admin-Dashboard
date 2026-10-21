@@ -6,6 +6,7 @@ import Restaurants from './Resturant-Management/Restaurant'
 import Users from './User-Management/Users'
 import Support from './Support/Support'
 import DeliveryFees from './Delivery-Fee-Management/DeliveryFees'
+import Reviews from './Review-Management/Reviews'
 import ProtectedRoute from './ProtectedRoutes'
 import OfflineBanner from './components/OfflineBanner'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -70,6 +71,14 @@ function App() {
       element: (
         <ProtectedRoute>
           <Support />
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: "/reviews",
+      element: (
+        <ProtectedRoute>
+          <Reviews />
         </ProtectedRoute>
       )
     }

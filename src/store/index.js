@@ -9,6 +9,7 @@ import { usersApi } from "../features/users/usersApi"
 import { dashboardApi } from "../features/dashboard/dashboardApi"
 import { supportApi } from "../features/support/supportApi"
 import { deliveryFeesApi } from "../features/deliveryFees/deliveryFeesApi"
+import { reviewsApi } from "../features/reviews/reviewsApi"
 import { ADMIN_STORAGE_KEYS } from "../constants/storageKeys"
 
 const loadAuthFromStorage = () => {
@@ -44,6 +45,7 @@ export const store = configureStore({
     [dashboardApi.reducerPath]: dashboardApi.reducer,
     [supportApi.reducerPath]: supportApi.reducer,
     [deliveryFeesApi.reducerPath]: deliveryFeesApi.reducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
   },
   preloadedState: {
     auth: loadAuthFromStorage(),
@@ -57,7 +59,8 @@ export const store = configureStore({
       usersApi.middleware,
       dashboardApi.middleware,
       supportApi.middleware,
-      deliveryFeesApi.middleware
+      deliveryFeesApi.middleware,
+      reviewsApi.middleware
     ),
 })
 

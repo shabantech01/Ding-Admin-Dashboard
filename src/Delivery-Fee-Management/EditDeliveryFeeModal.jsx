@@ -11,7 +11,6 @@ const EditDeliveryFeeForm = ({ currentFee, handleClose, onSuccess }) => {
   const [amount, setAmount] = useState(
     currentFee?.amount !== undefined ? String(currentFee.amount) : "15"
   )
-  const [isActive, setIsActive] = useState(currentFee?.isActive ?? true)
   const [description, setDescription] = useState(
     currentFee?.description ?? "Applied to all customer orders at checkout"
   )
@@ -46,7 +45,7 @@ const EditDeliveryFeeForm = ({ currentFee, handleClose, onSuccess }) => {
       const payload = {
         name: name.trim(),
         amount: Number(amount),
-        isActive: Boolean(isActive),
+        isActive: true,
         description: description.trim(),
       }
 
@@ -69,7 +68,6 @@ const EditDeliveryFeeForm = ({ currentFee, handleClose, onSuccess }) => {
     !currentFee ||
     name.trim() !== (currentFee.name || "").trim() ||
     Number(amount) !== Number(currentFee.amount) ||
-    Boolean(isActive) !== Boolean(currentFee.isActive) ||
     description.trim() !== (currentFee.description || "").trim()
 
   return (
@@ -129,47 +127,6 @@ const EditDeliveryFeeForm = ({ currentFee, handleClose, onSuccess }) => {
               This fixed amount will be added to the customer's cart total upon ordering.
             </p>
           )}
-        </div>
-
-        {/* Active Switch */}
-        <div className="p-4 rounded-xl border border-[#EDEDED] bg-[#FAFAFA] flex items-center justify-between gap-3">
-          <div className="flex flex-col gap-0.5">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#000000]!">
-                Impose Fee on Checkout
-              </span>
-              <span
-                className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
-                  isActive
-                    ? "bg-green-100 text-green-700"
-                    : "bg-gray-200 text-gray-600"
-                }`}
-              >
-                {isActive ? "Active" : "Disabled"}
-              </span>
-            </div>
-            <p className="text-[11px] text-[#8C8C8C]">
-              {isActive
-                ? "Fee is active and being imposed on all incoming customer orders."
-                : "Fee is paused. Deliveries will appear as free or without this fee."}
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setIsActive(!isActive)}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-              isActive ? "bg-[#765AB8]" : "bg-gray-300"
-            }`}
-            role="switch"
-            aria-checked={isActive}
-          >
-            <span
-              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                isActive ? "translate-x-5" : "translate-x-0"
-              }`}
-            />
-          </button>
         </div>
 
         {/* Description */}
