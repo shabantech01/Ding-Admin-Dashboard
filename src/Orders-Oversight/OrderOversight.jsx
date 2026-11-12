@@ -205,7 +205,7 @@ const OrderManagement = ({ onMenuClick }) => {
 
   // ── Stat cards — derived from currently loaded + filtered data ─────────────
   const totalLoaded  = displayedOrders.length
-  const totalRevenue = displayedOrders.reduce((s, o) => s + Number(o.totalAmount), 0)
+  const totalRevenue = displayedOrders.filter(o => o.paymentStatus === "SUCCEEDED").reduce((s, o) => s + Number(o.totalAmount), 0)
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
