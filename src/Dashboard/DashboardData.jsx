@@ -34,9 +34,9 @@ const RANK_COLORS = [
 
 const formatCurrency = (val) => {
   if (val == null) return "—";
-  if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(1)}M`;
-  if (val >= 10_000) return `$${(val / 1_000).toFixed(1)}K`;
-  return `$${val.toLocaleString()}`;
+  if (val >= 1_000_000) return `R ${(val / 1_000_000).toFixed(1)}M`;
+  if (val >= 10_000) return `R ${(val / 1_000).toFixed(1)}K`;
+  return `R ${val.toLocaleString()}`;
 };
 
 const formatDeliveryTime = (mins) => {
