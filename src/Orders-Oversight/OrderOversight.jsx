@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react"
-import { Search, ShoppingBag, DollarSign, RefreshCw, ChevronDown } from "lucide-react"
+import { Search, ShoppingBag, RefreshCw, ChevronDown, XCircle } from "lucide-react"
 import Topbar from "../Dashboard/Topbar"
 import OrderDetailModal from "./OrderDetail"
 import { useLazyGetAdminOrdersQuery } from "../features/orders/ordersApi"
@@ -206,6 +206,7 @@ const OrderManagement = ({ onMenuClick }) => {
   // ── Stat cards — derived from currently loaded + filtered data ─────────────
   const totalLoaded  = displayedOrders.length
   const totalRevenue = displayedOrders.filter(o => o.paymentStatus === "SUCCEEDED").reduce((s, o) => s + Number(o.totalAmount), 0)
+  const totalFailed  = displayedOrders.filter(o => o.paymentStatus === "FAILED").reduce((s, o) => s + Number(o.totalAmount), 0)
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
@@ -223,7 +224,7 @@ const OrderManagement = ({ onMenuClick }) => {
         </div>
 
         {/* ── Stat cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
           <div className="flex flex-col gap-4 p-4 border border-[#EDEDED] rounded-xl">
             <div className="flex items-center justify-between">
               <span className="text-[11px] sm:text-xs font-semibold text-[#8C8C8C] uppercase tracking-wide">
@@ -246,7 +247,7 @@ const OrderManagement = ({ onMenuClick }) => {
                 Revenue Shown
               </span>
               <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#DCFCE7]">
-                <DollarSign className="w-3.5 h-3.5 text-[#16A34A]" />
+                <span className="text-xs font-bold text-[#16A34A]">R</span>
               </div>
             </div>
             {isInitialLoading ? (
@@ -254,6 +255,24 @@ const OrderManagement = ({ onMenuClick }) => {
             ) : (
               <p className="text-2xl sm:text-3xl font-bold text-[#000000]">
                 R {totalRevenue.toLocaleString("en-ZA", { minimumFractionDigits: 0 })}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-4 p-4 border border-[#EDEDED] rounded-xl">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] sm:text-xs font-semibold text-[#8C8C8C] uppercase tracking-wide">
+                Failed Payments
+              </span>
+              <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#FEE2E2]">
+                <XCircle className="w-3.5 h-3.5 text-[#DC2626]" />
+              </div>
+            </div>
+            {isInitialLoading ? (
+              <div className="h-8 bg-[#F0F0F0] rounded-lg animate-pulse w-28" />
+            ) : (
+              <p className="text-2xl sm:text-3xl font-bold text-[#DC2626]">
+                R {totalFailed.toLocaleString("en-ZA", { minimumFractionDigits: 0 })}
               </p>
             )}
           </div>
