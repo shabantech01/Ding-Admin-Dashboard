@@ -49,16 +49,30 @@ const Topbar = ({ title = "SYSTEM OVERSIGHT", onMenuClick }) => {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={() => {
-              console.log("%c[DEV] Admin Access Token", "color:#765AB8;font-weight:bold;font-size:13px")
-              console.log(accessToken)
-            }}
-            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#765AB8] text-white text-xs sm:text-sm font-semibold hover:bg-[#654A9F] active:scale-95 transition-all cursor-pointer"
-            title={`[DEV] Click to log access token — ${displayName}`}
-          >
-            {getInitials(displayName)}
-          </button>
+          {/* Avatar with version tooltip */}
+          <div className="relative inline-flex group">
+            <button
+              onClick={() => {
+                console.log("%c[DEV] Admin Access Token", "color:#765AB8;font-weight:bold;font-size:13px")
+                console.log(accessToken)
+              }}
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#765AB8] text-white text-xs sm:text-sm font-semibold hover:bg-[#654A9F] active:scale-95 transition-all cursor-pointer"
+              aria-label={`${displayName} — v${__APP_VERSION__} (${__APP_BUILD__})`}
+            >
+              {getInitials(displayName)}
+            </button>
+
+            <div className="pointer-events-none absolute right-0 top-[calc(100%+10px)] z-9100 whitespace-nowrap rounded-[10px] border border-[#374151] bg-[#111827] px-[13px] py-[9px] shadow-[0_8px_28px_rgba(0,0,0,0.22)] opacity-0 invisible -translate-y-1.5 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+              {/* Up-pointing arrow */}
+              <span className="absolute top-[-5px] right-[14px] h-[9px] w-[9px] rotate-45 border-l border-t border-[#374151] bg-[#111827]" />
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-[10px] font-bold uppercase tracking-[0.6px] text-[#6B7280]">Build</span>
+                <span className="font-mono text-[11px] text-[#A78BFA]">
+                  v{__APP_VERSION__}({__APP_BUILD__})
+                </span>
+              </div>
+            </div>
+          </div>
 
           <button
             onClick={() => setShowLogoutConfirm(true)}
